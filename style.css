@@ -4,20 +4,39 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f0f0f0; /* Optional background color */
+  background-color: #f0f0f0;
 }
 
-/* Circle styling */
 .circle {
-  width: 200px;
-  height: 200px;
+  width: min(40vw, 40vh);
+  height: min(40vw, 40vh);
   background-color: #BADA55;
   border-radius: 50%;
-  transition: transform 0.3s ease;
+  transition: transform 0.15s ease;
+  z-index: 10;
 }
 
-/* Add a bouncy animation on hover */
 .circle:hover {
-  transform: scale(1.2) translateY(-10px);
-  transition: transform 0.3s ease-out;
+  transform: scale(1.15);
+  transition: transform 0.2s ease-out;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  height: 50%; /* Height of the wave */
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  transition: transform 0.2s ease;
+  pointer-events: none;
+}
+
+.bar {
+  pointer-events: none;
+  width: 10%; /* Each bar is a thin vertical line */
+  height: 0;
+  background-color: #ff8126;
+  transition: height 0.1s ease-out;
 }

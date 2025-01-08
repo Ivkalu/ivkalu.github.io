@@ -1,4 +1,5 @@
 const circle = document.querySelector('.circle');
+const wave = document.querySelector('.wave');
 const audioPlayer = document.getElementById('audioPlayer');
 
 let hasStarted = false;
@@ -12,24 +13,24 @@ const start = () => {
   source.connect(analyser);
   analyser.connect(audioContext.destination);
 
-  analyser.fftSize = 256;
+  analyser.fftSize = 64;
   const bufferLength = analyser.frequencyBinCount;
   const dataArray = new Uint8Array(bufferLength);
 
+  for (let i = 0; i < bufferLength; i++) {
+    const bar = document.createElement('div');
+    bar.classList.add('bar');
+    wave.appendChild(bar);
+  }
+  const bars = document.querySelectorAll('.bar');
+
   function animate() {
     analyser.getByteFrequencyData(dataArray);
-
-    const bassRangeStart = Math.floor(20 / (audioContext.sampleRate / analyser.fftSize));;
-    const bassRangeEnd = Math.floor(220 / (audioContext.sampleRate / analyser.fftSize));
-
-    let bassSum = 0;
-    for (let i = bassRangeStart; i < bassRangeEnd; i++) {
-      bassSum += dataArray[i];
-    }
-    const averageBassLoudness = bassSum / (bassRangeEnd - bassRangeStart);
-
-    const scale = Math.max(1, averageBassLoudness / 100);
-    circle.style.transform = `scale(${scale})`;
+    
+    bars.forEach((bar, index) => {
+      const height = dataArray[index]; // Frequency value for this bar
+      bar.style.height = `${height/5}vh`; // Scale it down for visualization
+    });
 
     requestAnimationFrame(animate);
   }
@@ -44,7 +45,6 @@ circle.addEventListener('click', () => {
   }
   if (isPlaying) {
     audioPlayer.pause();
-    circle.style.transform = 'scale(1)';
   } else {
     audioPlayer.play();
   }
