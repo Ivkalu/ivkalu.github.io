@@ -3,7 +3,6 @@ const wave = document.querySelector('.wave');
 const audioPlayer = document.getElementById('audioPlayer');
 
 let hasStarted = false;
-let isPlaying = false;
 
 const start = () => {
   const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -43,14 +42,9 @@ circle.addEventListener('click', () => {
     hasStarted = true;
     start()
   }
-  if (isPlaying) {
-    audioPlayer.pause();
-  } else {
+  if (audioPlayer.paused || audioPlayer.ended) {
     audioPlayer.play();
+  } else {
+    audioPlayer.pause();
   }
-  isPlaying = !isPlaying;
-});
-
-audioPlayer.addEventListener('ended', () => {
-  isPlaying = false;
 });
