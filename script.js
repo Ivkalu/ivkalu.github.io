@@ -50,3 +50,7 @@ circle.addEventListener('click', () => {
   }
   isPlaying = !isPlaying;
 });
+
+audioPlayer.addEventListener('ended', () => {
+  isPlaying = false;
+});
