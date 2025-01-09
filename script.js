@@ -28,8 +28,8 @@ const start = () => {
     analyser.getByteFrequencyData(dataArray);
     
     bars.forEach((bar, index) => {
-      const height = dataArray[index]; // Frequency value for this bar
-      bar.style.height = `${height/5}vh`; // Scale it down for visualization
+      const height = (dataArray[index]/255)*(1+2*index/bufferLength)*50;
+      bar.style.height = `${height}vh`;
     });
 
     requestAnimationFrame(animate);

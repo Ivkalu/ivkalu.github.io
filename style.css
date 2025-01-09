@@ -35,7 +35,7 @@ body {
 
 .bar {
   pointer-events: none;
-  width: 10%; /* Each bar is a thin vertical line */
+  width: 100%; /* Each bar is a thin vertical line */
   height: 0;
   background-color: #ff8126;
   transition: height 0.1s ease-out;
