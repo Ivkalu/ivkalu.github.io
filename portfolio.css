@@ -1,0 +1,180 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+    background: linear-gradient(135deg, #f2f3f5 40%, #e1e4eb 100%);
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #1f2a44;
+    color: #e1e4eb;
+    text-align: center;
+    padding: 70px;
+    border-bottom: 4px solid #b0b5bd;
+    position: relative;
+}
+
+header:before, header:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 60px;
+    height: 60px;
+    background-color: #b0b5bd;
+}
+
+header:before {
+    left: 0;
+    clip-path: polygon(0 0, 0% 100%, 100% 0);
+}
+
+header:after {
+    right: 0;
+    clip-path: polygon(100% 0, 100% 100%, 0 0);
+}
+
+h1 {
+    font-size: 3.5em;
+    margin: 0;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+    font-family: 'Roboto', sans-serif;
+}
+
+p {
+    font-size: 1.15em;
+    line-height: 1.8;
+    margin-top: 10px;
+    color: #444;
+}
+
+.contact a {
+    color: #00b3b3;
+    font-weight: bold;
+    margin: 0 15px;
+    font-size: 1.1em;
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    transition: color 0.3s, border-color 0.3s;
+}
+
+.contact a:hover {
+    color: #fff;
+    background-color: #00b3b3;
+    border: 2px solid #fff;
+}
+
+section {
+    padding: 50px;
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: #fff;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    position: relative;
+    border-left: 5px solid #1f2a44;
+    border-right: 5px solid #1f2a44;
+    border-image: linear-gradient(to bottom, #1f2a44, #00b3b3);
+    border-image-slice: 1;
+}
+
+section:before, section:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    width: 40px;
+    height: 40px;
+    background-color: #1f2a44;
+}
+
+section:before {
+    left: 0;
+    clip-path: polygon(0 0, 0% 100%, 100% 0);
+}
+
+section:after {
+    right: 0;
+    clip-path: polygon(100% 0, 100% 100%, 0 0);
+}
+
+/* Make the entire project and thesis block clickable */
+a.project-link, a.thesis-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+a.project-link:hover .project, a.thesis-link:hover .thesis {
+    transform: scale(1.03);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.project, .thesis {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-left: 4px solid #00b3b3;
+    background-color: #f2f3f5;
+    border-radius: 10px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.project:hover, .thesis:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.project a, .thesis a {
+    text-decoration: none;
+    color: #1f2a44;
+    font-weight: bold;
+}
+
+.project a:hover, .thesis a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5em;
+    }
+
+    header {
+        padding: 50px 20px;
+    }
+
+    section {
+        padding: 20px;
+        margin: 20px auto;
+    }
+}
+
+.thesis-photo {
+    max-width: 100%; /* Ensures the image scales properly to fit within its container */
+    height: auto;
+    border-radius: 8px;
+    margin-top: 15px; /* Adds spacing between the description and the image */
+}
+
+.project {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.project-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+.project-link {
+    text-decoration: none;
+    color: inherit;
+}

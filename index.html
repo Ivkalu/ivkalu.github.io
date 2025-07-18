@@ -1,19 +1,310 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Ivkalu's Music</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <audio id="audioPlayer" autoplay>
-      <source src="song.mp3" type="audio/mp3">
-    </audio>
-    <div 
-      class="circle" 
-      style=background-color:#BADA55
-    >
-    </div>
-    <div class="wave"></div>
-    <script src="script.js"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luka Ivanković - ML Engineer</title>
+    <!--<link rel="icon" href="VD.png" type="image/png">-->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="portfolio.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            background-color: #f2f3f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #1f2a44;
+            color: #e1e4eb;
+            text-align: center;
+            padding: 70px;
+            border-bottom: 4px solid #b0b5bd;
+            position: relative;
+        }
+
+        header:before, header:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 60px;
+            height: 60px;
+            background-color: #b0b5bd;
+        }
+
+        header:before {
+            left: 0;
+            clip-path: polygon(0 0, 0% 100%, 100% 0);
+        }
+
+        header:after {
+            right: 0;
+            clip-path: polygon(100% 0, 100% 100%, 0 0);
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin: 0;
+            letter-spacing: 0.08em;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-top: 15px;
+            font-weight: 400;
+            color: #b0b5bd;
+        }
+
+        .contact a {
+            color: #00b3b3;
+            font-weight: bold;
+            margin: 0 15px;
+            font-size: 1.1em;
+            text-decoration: none;
+            padding: 5px 10px;
+            border: 2px solid transparent;
+            border-radius: 8px;
+        }
+
+        .contact a:hover {
+            color: #e1e4eb;
+            border: 2px solid #00b3b3;
+        }
+
+        section {
+            padding: 50px;
+            max-width: 900px;
+            margin: 40px auto;
+            background-color: #fff;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            position: relative;
+            border-left: 5px solid #1f2a44;
+            border-right: 5px solid #1f2a44;
+        }
+
+        section:before, section:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            width: 40px;
+            height: 40px;
+            background-color: #1f2a44;
+        }
+
+        section:before {
+            left: 0;
+            clip-path: polygon(0 0, 0% 100%, 100% 0);
+        }
+
+        section:after {
+            right: 0;
+            clip-path: polygon(100% 0, 100% 100%, 0 0);
+        }
+
+        section p {
+            color: #555;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .project {
+            margin-bottom: 20px;
+            padding: 20px;
+            border-left: 4px solid #00b3b3;
+            background-color: #f2f3f5;
+            border-radius: 10px;
+        }
+
+        .project a {
+            text-decoration: none;
+            color: #1f2a44;
+            font-weight: bold;
+        }
+
+        .project a:hover {
+            text-decoration: underline;
+        }
+
+        .thesis {
+            margin-bottom: 20px;
+            padding: 20px;
+            border-left: 4px solid #00b3b3;
+            background-color: #f2f3f5;
+            border-radius: 10px;
+        }
+
+        .thesis a {
+            text-decoration: none;
+            color: #1f2a44;
+            font-weight: bold;
+        }
+
+        .thesis a:hover {
+            text-decoration: underline;
+        }
+
+        .image-wrapper {
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .project-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Luka Ivanković</h1>
+        <p>Machine Learning Engineer | Dev Ops | Full-Stack Developer</p>
+        <div class="contact">
+            <a href="mailto:ivkalu@gmail.com">ivkalu@gmail.com</a> |
+            <!--<img class="icon " src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/2048px-Octicons-mark-github.svg.png" height="16" width="16">-->
+            <a href="https://github.com/ivkalu">GitHub</a> |
+            <a href="bouncer.html">Fun</a>
+            <!--<a href="CV">📜 CV</a>-->
+        </div>
+    </header>
+
+<section>
+    <p><strong>About me:</strong></p>
+    <p>
+        I’m a creative, enthusiastic, and competitive developer With a strong foundation in software engineering and a passion for machine learning and music tech. 
+        I'm currently wrapping up my master’s thesis at Faculty of Electrical Engineering and Computing,
+        where I’ve delved into advanced audio signal processing and deep learning. My research focuses on emulating guitar effects using neural networks.
+        I’m deeply motivated by the challenge of learning new things, which fuels my technical versatility, leadership, and drive to turn bold ideas into reliable, scalable solutions. 
+        As Cal Newport puts it, <em>"The ability to learn quickly is a superpower in today's fast-paced world."</em>
+    </p>
+
+
+    <p><strong>About me again:</strong></p>
+    <p>
+        Besides programming I enjoy listening, playing and composing music. I am a self taught guitarist and recently I bought a piano which became my new favorite obsession.
+        I believe both programming and playing instruments tackle the same creative part of the brain. I regularly train to keep my body and mind healthy. Naturally these full-body workouts make me hungry, so I also enjoy cooking.
+        I'm a casual D&D player and enjoy kicking ass in Catan.
+    </p>
+</section>
+
+
+<section>
+    <h2>Projects</h2>
+
+    <a href="" class="project-link">
+        <div class="project">
+            <p><strong>Genetic Algorithm for Image Recreation</strong></p>
+            <p>
+                Developed a genetic algorithm in Python to recreate target images, successfully approximated the Mona Lisa using evolving polygon-based visuals optimized against a human-perception-based color metric.
+            </p>
+            <div class="image-wrapper">
+                <img src="" alt="" class="project-image">
+            </div>
+        </div>
+    </a>
+
+    <a href="" class="project-link">
+        <div class="project">
+            <p><strong>Neuroevolution of Augmenting Topologies</strong></p>
+            <p>
+                NEAT was used to train a Chrome Dino get a score of 10000 in the Dinosaur Game. 
+            </p>
+            <div class="image-wrapper">
+                <img src="" alt="" class="project-image">
+            </div>
+        </div>
+    </a>
+
+    <a href="" class="project-link">
+        <div class="project">
+            <p><strong>Mandelbrot Set Zoomer</strong></p>
+            <p>
+               C++ 
+            </p>
+            <div class="image-wrapper">
+                <img src="" alt="" class="project-image">
+            </div>
+        </div>
+    </a>
+        
+</section>
+
+<section>
+    <h2>Competitions</h2>
+    
+    <p style="margin-bottom: 40px;">
+        I'm a very competitive person and enjoy testing my skills in real-world challenges. 
+        Over the years, I've participated in a variety of hackathons and algorithm competitions, including the 
+        <strong>Algotrade Hackathon</strong> 2024, <strong>AI-Battlegrounds Hackathon</strong> 2024 (which I won), and the 
+        <strong>National Competition in Algorithms</strong> (2017 & 2018), where I gained valuable experience in creative problem-solving under pressure.
+    </p>
+
+    <a href="https://github.com/rangoiv/Lumen" class="project-link">
+        <div class="project">
+            <p><strong>Lumen Datascience 2023 - Audio Instrument Classification</strong></p>
+            <p>
+                This project was a team effort between me and my brother for the Lumen Datascience competition. 
+                We tackled the problem of <strong>audio instrument classification</strong> using deep learning. 
+                Models like <strong>VGG16</strong>, <strong>SqueezeNet</strong>, and <strong>ResNet18</strong> were trained 
+                to classify which instruments appeared in a given audio clip, reaching up to <strong>90.4% accuracy</strong>.
+            </p>
+            <div class="image-wrapper">
+                <img src="img/lumen.png" alt="Lumen Datascience" class="project-image" width="400">
+            </div>
+        </div>
+    </a>
+
+    <a href="https://rangoiv.itch.io/dream-depths" class="project-link">
+        <div class="project">
+            <p><strong>Ludum Dare 2025 - Dream Depths</strong></p>
+            <p>
+                This game was created during a 3-day game jam by a team of 4 developers. The theme challenged us to design a game centered around exploring other people’s dreams a concept inspired by Inception. Dive deeper into the dreams of NPCs, uncover hidden layers of their subconscious, and perhaps even discover The Chosen One. Fight off enemy agents trying to stop you along the way.
+                This was our first time using the <strong>Godot game engine</strong> — a fun and rewarding learning experience
+            </p>
+            <div class="image-wrapper">
+                <img src="img/ludum-dare.png" alt="Ludum Dare Game" class="project-image" width="400">
+            </div>
+        </div>
+    </a>
+
+    
+
+</section>
+
+<section>
+    <h2>Theses</h2>
+
+    <a href="" class="thesis-link">
+        <div class="thesis">
+            <p><strong>Bachelor’s thesis</strong></p>
+            <p>I developed a multiplayer combat game with a shape-drawing mechanic. Resnet18
+was trained to classify those shapes up to 99% accuracy
+            </p>
+            <img src="" alt="Bachelor's Thesis Photo" class="thesis-photo">
+        </div>
+    </a>
+
+    <a href="" class="thesis-link">
+        <div class="thesis">
+            <p><strong>Master’s thesis</strong></p>
+            <p>
+                (Emulation of Guitar Effects Using Machine Learning)  
+            </p>
+            <img src="" alt="Master's Thesis Photo" class="thesis-photo">
+        </div>
+    </a>
+    
+
+</section>
+
+</body>
 </html>
