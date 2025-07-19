@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luka Ivanković - ML Engineer</title>
+    <title>Luka Ivanković | ML Engineer</title>
     <!--<link rel="icon" href="VD.png" type="image/png">-->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="portfolio.css">
@@ -180,7 +180,7 @@
 <section>
     <p><strong>About me:</strong></p>
     <p>
-        I’m a creative, enthusiastic, and competitive developer With a strong foundation in software engineering and a passion for machine learning and music tech. 
+        I’m a creative, enthusiastic, and competitive developer with a strong foundation in software engineering and a passion for machine learning and music tech. 
         I'm currently wrapping up my master’s thesis at Faculty of Electrical Engineering and Computing,
         where I’ve delved into advanced audio signal processing and deep learning. My research focuses on emulating guitar effects using neural networks.
         I’m deeply motivated by the challenge of learning new things, which fuels my technical versatility, leadership, and drive to turn bold ideas into reliable, scalable solutions. 
@@ -200,38 +200,41 @@
 <section>
     <h2>Projects</h2>
 
-    <a href="" class="project-link">
+    <a href="https://github.com/Ivkalu/genetic-image-creator" class="project-link">
         <div class="project">
             <p><strong>Genetic Algorithm for Image Recreation</strong></p>
             <p>
-                Developed a genetic algorithm in Python to recreate target images, successfully approximated the Mona Lisa using evolving polygon-based visuals optimized against a human-perception-based color metric.
+                Developed a genetic algorithm in Python using <strong>Pygame</strong> to recreate target images. Successfully approximated the Mona Lisa by evolving polygon-based visuals, optimized using a human-perception-based color metric.
             </p>
             <div class="image-wrapper">
-                <img src="" alt="" class="project-image">
+                <img src="img/genetic.png" alt="Genetic Algorithm for Image Recreation" class="project-image">
             </div>
         </div>
     </a>
 
-    <a href="" class="project-link">
+    <a href="https://github.com/Ivkalu/NEAT" class="project-link">
         <div class="project">
             <p><strong>Neuroevolution of Augmenting Topologies</strong></p>
             <p>
-                NEAT was used to train a Chrome Dino get a score of 10000 in the Dinosaur Game. 
+                Implemented the NEAT algorithm to evolve neural networks capable of playing the <strong>Chrome Dinosaur Game</strong>. 
+                The system trained agents to learn jumping and ducking behavior purely through evolutionary strategies, without any hardcoded rules. 
+                After several generations, the best-performing network was able to achieve a score of over 10,000, effectively beating the game.
             </p>
             <div class="image-wrapper">
-                <img src="" alt="" class="project-image">
+                <img src="img/NEAT.png" alt="NEAT" class="project-image">
             </div>
         </div>
     </a>
 
-    <a href="" class="project-link">
+    <a href="https://github.com/Ivkalu/mandelbrot-set" class="project-link">
         <div class="project">
-            <p><strong>Mandelbrot Set Zoomer</strong></p>
+            <p><strong>Mandelbrot & Julia Set Visualiser</strong></p>
             <p>
-               C++ 
+                Created a real-time Mandelbrot and Julia set visualizer using <strong>C++</strong> and the <strong>SDL2</strong> library. 
+                The Julia set dynamically updates based on the mouse position, allowing users to interactively explore both fractals and zoom in almost indefinitely, revealing their intricate self-similarity and complexity.
             </p>
             <div class="image-wrapper">
-                <img src="" alt="" class="project-image">
+                <img src="img/mandelbrot.png" alt="Mandelbrot set" class="project-image" width="400">
             </div>
         </div>
     </a>
@@ -283,23 +286,30 @@
 <section>
     <h2>Theses</h2>
 
-    <a href="" class="thesis-link">
+    <a href="Zavrsni_rad.pdf" target="_blank" class="thesis-link">
         <div class="thesis">
-            <p><strong>Bachelor’s thesis</strong></p>
-            <p>I developed a multiplayer combat game with a shape-drawing mechanic. Resnet18
-was trained to classify those shapes up to 99% accuracy
+            <p><strong>Bachelor’s thesis - Deep learning for symbol recognition inside computer game</strong></p>
+            <p>
+            I developed a multiplayer combat game with a unique shape-drawing mechanic. The client was written in <strong>C++</strong> using the <strong>SDL2</strong> library for rendering, while the server was implemented in <strong>Python</strong>. Communication between the client and server was handled using <strong>TCP sockets</strong>.
+            <br><br>
+            A <strong>ResNet18</strong> model, pretrained on <strong>MNIST</strong>, was fine-tuned to recognize objects that players drew on screen. Based on the classification results (achieving 99% accuracy) players could perform different types of attacks.
             </p>
-            <img src="" alt="Bachelor's Thesis Photo" class="thesis-photo">
+
+            <div class="image-wrapper">
+                <img src="img/resnet18.png" alt="Bachelor's Thesis Photo" class="project-image">
+            </div>
         </div>
     </a>
 
-    <a href="" class="thesis-link">
+    <a href="Zavrsni_rad.pdf" download class="thesis-link">
         <div class="thesis">
-            <p><strong>Master’s thesis</strong></p>
+            <p><strong>Master’s thesis - Emulation of Guitar Effects Using Machine Learning</strong></p>
             <p>
-                (Emulation of Guitar Effects Using Machine Learning)  
+                This thesis explores the use of machine learning to emulate guitar effect pedals such as distortion and reverb. Traditional analog and DSP-based designs can be complex and time-consuming to model, especially due to the nonlinear and time-dependent nature of audio processing. The project investigates both black-box and gray-box approaches: starting with fully connected networks and advancing to architectures like <strong>LSTMs</strong>, <strong>WaveNet</strong>, <strong>TCNs</strong>, and <strong>Transformers</strong>. Gray-box methods such as genetic algorithms and differentiable DSP are also explored and compared.
             </p>
-            <img src="" alt="Master's Thesis Photo" class="thesis-photo">
+            <div class="image-wrapper">
+                <img src="img/masters-thesis.png" alt="Master's Thesis Photo" class="project-image" width="400">
+            </div>
         </div>
     </a>
     
