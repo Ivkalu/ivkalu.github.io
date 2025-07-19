@@ -1,7 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+
   const circle = document.querySelector('.circle');
   const wave = document.querySelector('.wave');
   const audioPlayer = document.getElementById('audioPlayer');
+
+  // Get song from URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const song = urlParams.get('song') || 'song.mp3'; // fallback to default
+
+  // Set audio source
+  const source = document.getElementById('audioSource');
+  source.src = song;
+
+  // Reload the audio element to apply new source
+  audioPlayer.load();
 
   let hasStarted = false;
 
@@ -18,10 +31,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function start() {
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
     const analyser = audioContext.createAnalyser();
-    const source = audioContext.createMediaElementSource(audioPlayer);
 
-    source.connect(analyser);
-    analyser.connect(audioContext.destination);
+    // Only create source node after ensuring it's not already created
+    if (!audioPlayer._sourceNode) {
+      const sourceNode = audioContext.createMediaElementSource(audioPlayer);
+      audioPlayer._sourceNode = sourceNode; // save it to avoid duplicate creation
+      sourceNode.connect(analyser);
+      analyser.connect(audioContext.destination);
+    }
 
     analyser.fftSize = 64;
     const bufferLength = analyser.frequencyBinCount;
@@ -42,22 +59,18 @@ document.addEventListener('DOMContentLoaded', () => {
         bar.style.height = `${height}vh`;
       });
 
-      // Calculate average volume
       const avg = dataArray.reduce((sum, value) => sum + value, 0) / bufferLength;
-
-      // Scale the circle based on volume (range: 1 to 1.3)
       const scale = 1 + avg / 512;
-      // circle.style.transform = `scale(${scale})`;
       const hoverScale = isHovered ? 1.15 : 1;
       const combinedScale = scale * hoverScale;
       circle.style.transform = `scale(${combinedScale})`;
-
 
       requestAnimationFrame(animate);
     }
 
     animate();
   }
+
 
   circle.addEventListener('click', () => {
     if (!hasStarted) {
