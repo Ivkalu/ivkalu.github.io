@@ -3,11 +3,50 @@
   <head>
     <title>Bouncer | Ivkalu's Music</title>
     <link rel="stylesheet" href="bouncer.css">
+    <style>
+  .back-arrow {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 32px; /* MUCH bigger text */
+    background-color: white;
+    padding: 18px 24px;
+    border-radius: 14px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    line-height: 1;
+  }
+
+  .back-arrow:hover {
+    text-decoration: underline;
+  }
+
+  .arrow-icon {
+    border: solid #007BFF;
+    border-width: 0 6px 6px 0;
+    display: inline-block;
+    padding: 12px;
+    transform: rotate(135deg);
+  }
+</style>
+
+
   </head>
   <body>
+    <a href="music.html" class="back-arrow">
+     <i class="arrow-icon"></i> Back to Music
+    </a>
     <audio id="audioPlayer">
-      <source src="song.mp3" type="audio/mp3">
+      <source id="audioSource" src="" type="audio/mp3">
     </audio>
+
 
     <div class="circle" style="background-color:#BADA55"></div>
     <div class="wave"></div>
