@@ -6,162 +6,8 @@
     <title>Luka Ivanković | ML Engineer</title>
     <!--<link rel="icon" href="VD.png" type="image/png">-->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="portfolio.css">
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
-            background-color: #f2f3f5;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #1f2a44;
-            color: #e1e4eb;
-            text-align: center;
-            padding: 70px;
-            border-bottom: 4px solid #b0b5bd;
-            position: relative;
-        }
-
-        header:before, header:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            width: 60px;
-            height: 60px;
-            background-color: #b0b5bd;
-        }
-
-        header:before {
-            left: 0;
-            clip-path: polygon(0 0, 0% 100%, 100% 0);
-        }
-
-        header:after {
-            right: 0;
-            clip-path: polygon(100% 0, 100% 100%, 0 0);
-        }
-
-        h1 {
-            font-size: 3.5em;
-            margin: 0;
-            letter-spacing: 0.08em;
-        }
-
-        p {
-            font-size: 1.2em;
-            margin-top: 15px;
-            font-weight: 400;
-            color: #b0b5bd;
-        }
-
-        .contact a {
-            color: #00b3b3;
-            font-weight: bold;
-            margin: 0 15px;
-            font-size: 1.1em;
-            text-decoration: none;
-            padding: 5px 10px;
-            border: 2px solid transparent;
-            border-radius: 8px;
-        }
-
-        .contact a:hover {
-            color: #e1e4eb;
-            border: 2px solid #00b3b3;
-        }
-
-        section {
-            padding: 50px;
-            max-width: 900px;
-            margin: 40px auto;
-            background-color: #fff;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            position: relative;
-            border-left: 5px solid #1f2a44;
-            border-right: 5px solid #1f2a44;
-        }
-
-        section:before, section:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            width: 40px;
-            height: 40px;
-            background-color: #1f2a44;
-        }
-
-        section:before {
-            left: 0;
-            clip-path: polygon(0 0, 0% 100%, 100% 0);
-        }
-
-        section:after {
-            right: 0;
-            clip-path: polygon(100% 0, 100% 100%, 0 0);
-        }
-
-        section p {
-            color: #555;
-            font-size: 1.1em;
-            line-height: 1.6;
-        }
-
-        .project {
-            margin-bottom: 20px;
-            padding: 20px;
-            border-left: 4px solid #00b3b3;
-            background-color: #f2f3f5;
-            border-radius: 10px;
-        }
-
-        .project a {
-            text-decoration: none;
-            color: #1f2a44;
-            font-weight: bold;
-        }
-
-        .project a:hover {
-            text-decoration: underline;
-        }
-
-        .thesis {
-            margin-bottom: 20px;
-            padding: 20px;
-            border-left: 4px solid #00b3b3;
-            background-color: #f2f3f5;
-            border-radius: 10px;
-        }
-
-        .thesis a {
-            text-decoration: none;
-            color: #1f2a44;
-            font-weight: bold;
-        }
-
-        .thesis a:hover {
-            text-decoration: underline;
-        }
-
-        .image-wrapper {
-            background-color: white;
-            padding: 10px;
-            border-radius: 10px;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .project-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            display: block;
-            margin: 0 auto;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/portfolio.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
 </head>
 <body>
 
@@ -207,7 +53,7 @@
                 Developed a genetic algorithm in Python using <strong>Pygame</strong> to recreate target images. Successfully approximated the Mona Lisa by evolving polygon-based visuals, optimized using a human-perception-based color metric.
             </p>
             <div class="image-wrapper">
-                <img src="img/genetic.png" alt="Genetic Algorithm for Image Recreation" class="project-image">
+                <img src="assets/img/genetic.png" alt="Genetic Algorithm for Image Recreation" class="project-image">
             </div>
         </div>
     </a>
@@ -221,7 +67,7 @@
                 After several generations, the best-performing network was able to achieve a score of over 10,000, effectively beating the game.
             </p>
             <div class="image-wrapper">
-                <img src="img/NEAT.png" alt="NEAT" class="project-image">
+                <img src="assets/img/NEAT.png" alt="NEAT" class="project-image">
             </div>
         </div>
     </a>
@@ -234,7 +80,7 @@
                 The Julia set dynamically updates based on the mouse position, allowing users to interactively explore both fractals and zoom in almost indefinitely, revealing their intricate self-similarity and complexity.
             </p>
             <div class="image-wrapper">
-                <img src="img/mandelbrot.png" alt="Mandelbrot set" class="project-image" width="400">
+                <img src="assets/img/mandelbrot.png" alt="Mandelbrot set" class="project-image" width="400">
             </div>
         </div>
     </a>
@@ -261,7 +107,7 @@
                 to classify which instruments appeared in a given audio clip, reaching up to <strong>90.4% accuracy</strong>.
             </p>
             <div class="image-wrapper">
-                <img src="img/lumen.png" alt="Lumen Datascience" class="project-image" width="400">
+                <img src="assets/img/lumen.png" alt="Lumen Datascience" class="project-image" width="400">
             </div>
         </div>
     </a>
@@ -274,7 +120,7 @@
                 This was our first time using the <strong>Godot game engine</strong> — a fun and rewarding learning experience
             </p>
             <div class="image-wrapper">
-                <img src="img/ludum-dare.png" alt="Ludum Dare Game" class="project-image" width="400">
+                <img src="assets/img/ludum-dare.png" alt="Ludum Dare Game" class="project-image" width="400">
             </div>
         </div>
     </a>
@@ -286,7 +132,7 @@
 <section>
     <h2>Theses</h2>
 
-    <a href="Zavrsni_rad.pdf" download target="_blank" class="thesis-link">
+    <a href="docs/Zavrsni_rad.pdf" download target="_blank" class="thesis-link">
         <div class="thesis">
             <p><strong>Bachelor’s thesis - Deep learning for symbol recognition inside computer game</strong></p>
             <p>
@@ -301,7 +147,7 @@
         </div>
     </a>
 
-    <a href="Master.pdf" download target="_blank" class="thesis-link">
+    <a href="docs/Master.pdf" download target="_blank" class="thesis-link">
         <div class="thesis">
             <p><strong>Master’s thesis - Emulation of Guitar Effects Using Machine Learning</strong></p>
             <p>
