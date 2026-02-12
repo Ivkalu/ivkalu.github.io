@@ -2,8 +2,6 @@ name: Build CV PDF
 
 on:
   push:
-    paths:
-      - cv.tex
 
 permissions:
   contents: write
