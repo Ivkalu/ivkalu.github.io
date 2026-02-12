@@ -1,0 +1,42 @@
+name: Build CV PDF
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - cv.tex
+      - assets/**
+      - .github/workflows/build-cv.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-cv-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    # Prevent infinite loops when the workflow commits the generated PDF back to main.
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Compile cv.tex
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: cv.tex
+
+      - name: Place PDF in docs/
+        shell: bash
+        run: |
+          mkdir -p docs
+          mv -f "cv.pdf" "docs/Luka Ivanković.pdf"
+
+      - name: Commit PDF
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "workflow commit: update CV PDF [skip ci]"
+          file_pattern: "docs/Luka Ivanković.pdf"

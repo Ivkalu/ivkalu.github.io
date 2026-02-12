@@ -1,0 +1,153 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[left=0.7in,right=0.7in,top=0.6in,bottom=0.6in]{geometry}
+\usepackage{paracol}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{parskip}
+\usepackage{fontawesome5}
+
+% ---------- Colors ----------
+\definecolor{darkgray}{RGB}{60,60,60}
+\definecolor{midgray}{RGB}{110,110,110}
+\definecolor{lightgray}{RGB}{180,180,180}
+
+% ---------- Section style ----------
+\titleformat{\section}
+  {\large\bfseries\color{darkgray}}
+  {}
+  {0em}
+  {}
+  [\vspace{2pt}\color{lightgray}\titlerule]
+
+% ---------- Lists ----------
+\setlist[itemize]{
+  leftmargin=1.2em,
+  itemsep=2pt,
+  topsep=2pt
+}
+
+% ---------- Column gap ----------
+\setlength{\columnsep}{1.2cm}
+
+\pagestyle{empty}
+
+\begin{document}
+
+% ---------- Header ----------
+\begin{center}
+    {\Huge\bfseries Luka Ivanković} \\[4pt]
+    {\color{midgray}
+    \faPhone\ (385) 91 538 8467 \quad
+    \faEnvelope\ \href{mailto:ivkalu@gmail.com}{ivkalu@gmail.com} \quad
+    \faGithub\ \href{https://ivkalu.github.io/}{ivkalu.github.io}
+    }
+\end{center}
+
+\vspace{6mm}
+
+% ---------- Two Columns ----------
+\columnratio{0.68}
+\begin{paracol}{2}
+
+% ===== LEFT COLUMN (WIDE) =====
+\section*{Work Experience}
+
+\textbf{Alfatec} - Data Scientist \hfill {\color{midgray}Oct 2025 -- Present}
+\begin{itemize}
+    \item Integrated state-of-the-art technologies into an automated computer vision training pipeline.
+    \item Worked on AI PDF-processing tool for automating workflow and saving time.
+    \item Trained LSTMs and other models for time-series analysis.
+\end{itemize}
+
+\vspace{2mm}
+
+\textbf{TensorPix} - Full-stack Engineer \hfill {\color{midgray}May 2023 -- May 2025}
+\begin{itemize}
+    \item Engineered and deployed an audio denoising ML model into production.
+    \item Built a video reencoding and compression tool.
+    \item Advanced git with automated testing tools across multiple projects.
+\end{itemize}
+
+\vspace{2mm}
+
+\textbf{Ericsson Nikola Tesla} - Developer \hfill {\color{midgray}Oct 2022 -- Feb 2023}
+\begin{itemize}
+    \item Radio software development using Java and C++.
+\end{itemize}
+
+\vspace{4mm}
+
+\section*{Projects}
+
+\begin{itemize}
+    
+    \item Created a full web app for splitting audio stems with a distributed infrastructure and custom ML models on GCP. Built an audio reencoding tool.
+   
+    \item Fine-tuned embedding models and implemented three variations of a Retrieval-Augmented Generation (RAG) system, conducting comparative analyses of different retrieval methods, ultimately arriving at an agentic AI approach that delivered the best performance chatbot integrated into an existing financial application.
+
+    \item Developed an online platform for D\&D players to upload campaign files, including a Claude-code-inspired AI agent that generates new sessions and assists users in managing their files
+
+    \item Designed a PDF Reconstructor Agent and PDF Analyzer Agent that collaboratively reconstruct original documents using LaTeX with high fidelity.
+
+    \item CycleGAN trained on 1,193 Monet paintings for unpaired artistic style transfer.
+
+\end{itemize}
+
+\vspace{4mm}
+
+\section*{Competitions}
+
+\begin{itemize}
+
+     \item \textbf{Lumen Data Science} - Trained CV models to classify musical instruments from spectrograms (90\% accuracy).
+
+    \item Winner of \textbf{AI Battlegrounds Hackathon 2023}; participant in Algotrade Hackathon 2024.
+
+    \item National Competition in Algorithms 2017; 11th place, 2018; 6th place
+
+\end{itemize}
+
+\switchcolumn
+
+% ===== RIGHT COLUMN (NARROW) =====
+\section*{Technologies}
+\color{midgray}
+Python, PyTorch, Django \\
+Huggingface, Vllm, Scikit-learn \\
+JavaScript, TypeScript, Vue.js \\
+Nuxt.js, GCP, AWS \\
+Linux, Git, Docker, LangGraph \\
+
+\vspace{4mm}
+
+\section*{Education}
+\color{midgray}
+\textbf{Faculty of Electrical Engineering and Computing} \\
+2019 -- 2025
+
+\vspace{2mm}
+\textbf{M.Sc. Thesis} \\
+Emulation of Guitar Effects Using Machine Learning
+
+\vspace{2mm}
+\textbf{B.Sc. Thesis} \\
+Deep Learning for Symbol Recognition inside Computer Game
+
+\vspace{2mm}
+\section*{Relevant Coursework}
+Artificial Intelligence, Digital Image Processing, Deep Learning (I \& II), Neural Networks, Computer Vision, Machine Learning
+
+\vspace{4mm}
+
+\section*{Interests}
+\color{midgray}
+Guitar (8+ years), Piano \\
+Street workout, Cycling \\
+D\&D, Catan
+
+\end{paracol}
+
+\end{document}
