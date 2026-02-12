@@ -46,6 +46,50 @@
 <section>
     <h2>Projects</h2>
 
+    <a href="https://dnd-session-creator-frontend-275331783644.europe-west1.run.app/" class="project-link">
+        <div class="project">
+            <p><strong>D&D Session Creator (Agentic Campaign Assistant)</strong></p>
+            <p>
+                Built a full-stack platform for Dungeon Masters to manage campaigns, organize documents, and chat with an
+                AI agent that knows their entire campaign world. Players upload PDFs, Word docs, and text files — the system
+                extracts the content and makes it searchable by a sandboxed AI assistant equipped with tools inspired by
+                <strong>Claude Code</strong> (Grep, Read, Glob, and more).
+            </p>
+            <p>
+                The agent is built on <strong>Agency Swarm</strong> and the <strong>OpenAI Agents SDK</strong>,
+                running inside an isolated per-request workspace. The backend uses <strong>FastAPI</strong> with <strong>MongoDB</strong>
+                and <strong>AWS S3</strong>, while the frontend is a <strong>Nuxt 3</strong> app with <strong>Firebase</strong> authentication.
+            </p>
+            <div class="image-wrapper">
+                <img src="assets/img/dnd-architecture.png"
+                     alt="D&D Session Creator Architecture"
+                     class="project-image"
+                     width="500">
+            </div>
+        </div>
+    </a>
+
+    <a href="https://synesearch-556510469420.europe-west1.run.app/" class="project-link">
+        <div class="project">
+            <p><strong>SyneSearch (Agentic RAG Financial Chatbot)</strong></p>
+            <p>
+                Fine-tuned embedding models and built three variations of a <strong>Retrieval-Augmented Generation (RAG)</strong>
+                system — from naive chunking to fully agentic retrieval — then ran comparative analyses to find the best approach.
+                The agentic pipeline, where the LLM decides when and how to search, delivered the strongest results and was
+                integrated as a chatbot into an existing financial application.
+            </p>
+            <p>
+                The system uses <strong>LangChain</strong> for orchestration, a <strong>vector database</strong> for semantic search
+                over financial documents, and custom fine-tuned embeddings to improve domain-specific retrieval accuracy.
+            </p>
+            <div class="image-wrapper">
+                <img src="assets/img/synesearch-architecture.png"
+                     alt="SyneSearch Architecture"
+                     class="project-image">
+            </div>
+        </div>
+    </a>
+
     <a href="https://github.com/Ivkalu/agentic-pdf-reconstructor" class="project-link">
     <div class="project">
         <p><strong>Agentic PDF Reconstructor (Multi-Agent LaTeX Synthesis)</strong></p>
