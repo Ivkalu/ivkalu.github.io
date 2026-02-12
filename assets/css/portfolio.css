@@ -142,15 +142,42 @@ a.project-link:hover .project, a.thesis-link:hover .thesis {
 @media (max-width: 768px) {
     h1 {
         font-size: 2.5em;
+        letter-spacing: 0;
     }
 
     header {
-        padding: 50px 20px;
+        padding: 40px 15px;
+    }
+
+    .separator {
+        display: none;
+    }
+
+    .subtitle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+    }
+
+    .contact {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+    }
+
+    .contact a {
+        margin: 0;
     }
 
     section {
-        padding: 20px;
-        margin: 20px auto;
+        padding: 12px 6px;
+        margin: 12px 3px;
+    }
+
+    .project, .thesis {
+        padding: 10px 8px;
     }
 }
 
