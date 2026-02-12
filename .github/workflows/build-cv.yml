@@ -4,8 +4,6 @@ on:
   push:
     paths:
       - cv.tex
-      - assets/**
-      - .github/workflows/build-cv.yml
 
 permissions:
   contents: write
@@ -35,7 +33,19 @@ jobs:
           mv -f "cv.pdf" "docs/Luka Ivanković.pdf"
 
       - name: Commit PDF
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "workflow commit: update CV PDF [skip ci]"
-          file_pattern: "docs/Luka Ivanković.pdf"
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -f "docs/Luka Ivanković.pdf"
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "workflow commit: update CV PDF [skip ci]"
+          git push
