@@ -167,7 +167,7 @@ body.sidebar-open .sidebar-backdrop {
   background-color: #eaf3ff;
 }
 
-/* ---------- Playbar (Spotify style, slides in when hovering the bottom third) ---------- */
+/* ---------- Playbar (slides in when hovering the bottom third) ---------- */
 
 .playbar {
   position: fixed;
@@ -179,10 +179,13 @@ body.sidebar-open .sidebar-backdrop {
   grid-template-columns: minmax(0, 1fr) minmax(0, 720px) minmax(0, 1fr);
   align-items: center;
   gap: 16px;
-  padding: 10px 24px 12px;
-  background-color: #000;
+  padding: 12px 28px 14px;
+  background-color: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.15);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  color: #fff;
+  color: #333;
   transform: translateY(110%);
   opacity: 0;
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
@@ -194,7 +197,6 @@ body.sidebar-open .sidebar-backdrop {
 }
 
 .playbar-title {
-  font-size: 14px;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
@@ -219,36 +221,38 @@ body.sidebar-open .sidebar-backdrop {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   padding: 0;
   border: none;
+  border-radius: 50%;
   background: none;
-  color: #b3b3b3;
+  color: #555;
   cursor: pointer;
   transition: color 0.15s ease, transform 0.1s ease;
 }
 
 .control:hover {
-  color: #fff;
+  color: #222;
+  background-color: rgba(0, 0, 0, 0.06);
 }
 
 .control svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   fill: currentColor;
 }
 
 .control.play {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: #fff;
-  color: #000;
+  width: 46px;
+  height: 46px;
+  background-color: #ff8126;
+  color: white;
 }
 
 .control.play:hover {
-  color: #000;
+  color: white;
+  background-color: #f07015;
   transform: scale(1.06);
 }
 
@@ -261,9 +265,9 @@ body.sidebar-open .sidebar-backdrop {
   display: block;
 }
 
-/* Active shuffle / repeat: green with a dot underneath */
+/* Active shuffle / repeat: orange with a dot underneath */
 .control.toggle.active {
-  color: #1ed760;
+  color: #ff8126;
 }
 
 .control.toggle.active::after {
@@ -286,7 +290,7 @@ body.sidebar-open .sidebar-backdrop {
   min-width: 10px;
   height: 10px;
   border-radius: 5px;
-  background-color: #000;
+  background-color: white;
   font-size: 8px;
   font-weight: 700;
   line-height: 10px;
@@ -312,7 +316,7 @@ body.sidebar-open .sidebar-backdrop {
   min-width: 40px;
   font-size: 12px;
   font-variant-numeric: tabular-nums;
-  color: #b3b3b3;
+  color: #666;
 }
 
 .time:first-child {
@@ -329,14 +333,14 @@ body.sidebar-open .sidebar-backdrop {
 .playbar-volume svg {
   width: 16px;
   height: 16px;
-  fill: #b3b3b3;
+  fill: #666;
 }
 
 .playbar-volume .slider {
   width: 100px;
 }
 
-/* Thin bar: white fill, green on hover, knob appears on hover (like Spotify) */
+/* Thin bar with orange fill, the knob appears on hover */
 .slider {
   --fill: 0%;
   -webkit-appearance: none;
@@ -350,21 +354,21 @@ body.sidebar-open .sidebar-backdrop {
 .slider::-webkit-slider-runnable-track {
   height: 4px;
   border-radius: 2px;
-  background: linear-gradient(to right, #fff var(--fill), #4d4d4d var(--fill));
+  background: linear-gradient(to right, #ff8126 var(--fill), #ddd var(--fill));
 }
 
 .slider::-moz-range-track {
   height: 4px;
   border-radius: 2px;
-  background: linear-gradient(to right, #fff var(--fill), #4d4d4d var(--fill));
+  background: linear-gradient(to right, #ff8126 var(--fill), #ddd var(--fill));
 }
 
 .slider:hover::-webkit-slider-runnable-track {
-  background: linear-gradient(to right, #1ed760 var(--fill), #4d4d4d var(--fill));
+  background: linear-gradient(to right, #f07015 var(--fill), #ccc var(--fill));
 }
 
 .slider:hover::-moz-range-track {
-  background: linear-gradient(to right, #1ed760 var(--fill), #4d4d4d var(--fill));
+  background: linear-gradient(to right, #f07015 var(--fill), #ccc var(--fill));
 }
 
 .slider::-webkit-slider-thumb {
@@ -374,7 +378,7 @@ body.sidebar-open .sidebar-backdrop {
   margin-top: -4px;
   border: none;
   border-radius: 50%;
-  background-color: #fff;
+  background-color: #ff8126;
   opacity: 0;
 }
 
@@ -383,7 +387,7 @@ body.sidebar-open .sidebar-backdrop {
   height: 12px;
   border: none;
   border-radius: 50%;
-  background-color: #fff;
+  background-color: #ff8126;
   opacity: 0;
 }
 
