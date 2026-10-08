@@ -1,0 +1,100 @@
+[
+  {
+    "name": "Electronic",
+    "songs": [
+      {
+        "title": "Aphex twin 1",
+        "path": "assets/songs/1 Electronic/Aphex twin 1.mp3"
+      },
+      {
+        "title": "Aphex twin 2",
+        "path": "assets/songs/1 Electronic/Aphex twin 2.mp3"
+      },
+      {
+        "title": "It's the melody",
+        "path": "assets/songs/1 Electronic/It's the melody.mp3"
+      }
+    ]
+  },
+  {
+    "name": "House",
+    "songs": [
+      {
+        "title": "Car ride",
+        "path": "assets/songs/2 House/Car ride.mp3"
+      },
+      {
+        "title": "Free",
+        "path": "assets/songs/2 House/Free.mp3"
+      },
+      {
+        "title": "Funk throw",
+        "path": "assets/songs/2 House/Funk throw.mp3"
+      },
+      {
+        "title": "Jazz world",
+        "path": "assets/songs/2 House/Jazz world.mp3"
+      },
+      {
+        "title": "Make it",
+        "path": "assets/songs/2 House/Make it.mp3"
+      },
+      {
+        "title": "Mirage",
+        "path": "assets/songs/2 House/Mirage.mp3"
+      }
+    ]
+  },
+  {
+    "name": "Kult sfera",
+    "songs": [
+      {
+        "title": "S vremenom je sve bolje",
+        "path": "assets/songs/3 Kult sfera/1 S vremenom je sve bolje.mp3"
+      },
+      {
+        "title": "Kult sfera 2",
+        "path": "assets/songs/3 Kult sfera/Kult sfera 2.mp3"
+      },
+      {
+        "title": "Kult sfera 3",
+        "path": "assets/songs/3 Kult sfera/Kult sfera 3.mp3"
+      }
+    ]
+  },
+  {
+    "name": "Rap",
+    "songs": [
+      {
+        "title": "Nujabes",
+        "path": "assets/songs/4 Rap/Nujabes.mp3"
+      },
+      {
+        "title": "Rap 1",
+        "path": "assets/songs/4 Rap/Rap 1.mp3"
+      }
+    ]
+  },
+  {
+    "name": "Trap",
+    "songs": [
+      {
+        "title": "Trap 1",
+        "path": "assets/songs/5 Trap/Trap 1.mp3"
+      },
+      {
+        "title": "Trap beat with guitar solo",
+        "path": "assets/songs/5 Trap/Trap beat with guitar solo.mp3"
+      }
+    ]
+  },
+  {
+    "name": "Drill",
+    "songs": [
+      {
+        "title": "Josipa Lisac",
+        "path": "assets/songs/6 Drill/Josipa Lisac.mp3"
+      }
+    ]
+  }
+]
