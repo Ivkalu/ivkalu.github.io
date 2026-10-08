@@ -1,6 +1,8 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ivkalu Music</title>
     <link rel="stylesheet" href="assets/css/bouncer.css">
     <style>
@@ -43,13 +45,49 @@
     <a href="music.html" class="back-arrow">
      <i class="arrow-icon"></i> Back to Music
     </a>
-    <audio id="audioPlayer">
-      <source id="audioSource" src="" type="audio/mp3">
-    </audio>
+    <audio id="audioPlayer" preload="metadata"></audio>
+
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Show song list" aria-controls="sidebar" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <aside class="sidebar" id="sidebar" aria-label="Song list">
+      <div class="sidebar-header">
+        <h2>Songs</h2>
+        <button class="sidebar-close" id="sidebarClose" aria-label="Close song list">&times;</button>
+      </div>
+      <nav class="song-list" id="songList"></nav>
+    </aside>
 
 
     <div class="circle" style="background-color:#BADA55"></div>
     <div class="wave"></div>
+
+    <div class="playbar" id="playbar">
+      <div class="playbar-title" id="songTitle"></div>
+      <div class="playbar-controls">
+        <button class="control" id="prevButton" aria-label="Previous song">
+          <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zM9.5 12 18 6v12z"/></svg>
+        </button>
+        <button class="control play" id="playButton" aria-label="Play">
+          <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+        </button>
+        <button class="control" id="nextButton" aria-label="Next song">
+          <svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg>
+        </button>
+      </div>
+      <div class="playbar-progress">
+        <span class="time" id="currentTime">0:00</span>
+        <input type="range" id="seekBar" min="0" max="0" step="0.1" value="0" aria-label="Seek">
+        <span class="time" id="duration">0:00</span>
+      </div>
+      <div class="playbar-volume">
+        <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4z"/></svg>
+        <input type="range" id="volumeBar" min="0" max="1" step="0.01" value="1" aria-label="Volume">
+      </div>
+    </div>
 
     <!-- Back to Portfolio Link -->
     <!--<a href="portfolio.html">Back to Portfolio</a>-->

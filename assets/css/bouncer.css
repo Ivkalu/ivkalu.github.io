@@ -44,3 +44,265 @@ body {
   padding: 0;
 
 }
+/* ---------- Sidebar with song list ---------- */
+
+.sidebar-toggle {
+  position: absolute;
+  top: 120px;
+  left: 20px;
+  z-index: 1000;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  border: none;
+  border-radius: 14px;
+  background-color: white;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.sidebar-toggle span {
+  width: 30px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #007BFF;
+}
+
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1900;
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 2000;
+  width: min(320px, 85vw);
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.2);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  transform: translateX(-105%);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body.sidebar-open .sidebar {
+  transform: translateX(0);
+}
+
+body.sidebar-open .sidebar-backdrop {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.sidebar-header h2 {
+  margin: 0;
+  font-size: 22px;
+  color: #333;
+}
+
+.sidebar-close {
+  border: none;
+  background: none;
+  font-size: 32px;
+  line-height: 1;
+  color: #666;
+  cursor: pointer;
+}
+
+.song-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0 24px;
+}
+
+.song-list h3 {
+  margin: 16px 20px 6px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #999;
+}
+
+.song-list button {
+  display: block;
+  width: 100%;
+  padding: 9px 20px;
+  border: none;
+  background: none;
+  text-align: left;
+  font: inherit;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+
+.song-list button:hover {
+  background-color: #f3f6fb;
+}
+
+.song-list button.active {
+  color: #007BFF;
+  font-weight: 600;
+  background-color: #eaf3ff;
+}
+
+/* ---------- Playbar (slides in when hovering the bottom third) ---------- */
+
+.playbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1500;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 2fr) auto;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 28px;
+  background-color: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.15);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: #333;
+  transform: translateY(110%);
+  opacity: 0;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
+}
+
+.playbar.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.playbar-title {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.playbar-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.control:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.control svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.control.play {
+  width: 50px;
+  height: 50px;
+  background-color: #ff8126;
+  color: white;
+}
+
+.control.play:hover {
+  background-color: #f07015;
+}
+
+.control.play .icon-pause,
+.playbar.playing .control.play .icon-play {
+  display: none;
+}
+
+.playbar.playing .control.play .icon-pause {
+  display: block;
+}
+
+.playbar-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.playbar-progress input {
+  flex: 1;
+  min-width: 0;
+}
+
+.time {
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: #666;
+}
+
+.playbar-volume {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.playbar-volume svg {
+  width: 22px;
+  height: 22px;
+  fill: #666;
+}
+
+.playbar-volume input {
+  width: 100px;
+}
+
+.playbar input[type="range"] {
+  accent-color: #ff8126;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .playbar {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px 16px;
+    padding: 12px 16px;
+  }
+
+  .playbar-progress {
+    grid-column: 1 / -1;
+  }
+
+  .playbar-volume {
+    display: none;
+  }
+}
