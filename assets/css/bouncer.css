@@ -167,7 +167,7 @@ body.sidebar-open .sidebar-backdrop {
   background-color: #eaf3ff;
 }
 
-/* ---------- Playbar (slides in when hovering the bottom third) ---------- */
+/* ---------- Playbar (Spotify style, slides in when hovering the bottom third) ---------- */
 
 .playbar {
   position: fixed;
@@ -176,16 +176,13 @@ body.sidebar-open .sidebar-backdrop {
   bottom: 0;
   z-index: 1500;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 2fr) auto;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 720px) minmax(0, 1fr);
   align-items: center;
-  gap: 24px;
-  padding: 16px 28px;
-  background-color: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.15);
+  gap: 16px;
+  padding: 10px 24px 12px;
+  background-color: #000;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  color: #333;
+  color: #fff;
   transform: translateY(110%);
   opacity: 0;
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
@@ -197,51 +194,62 @@ body.sidebar-open .sidebar-backdrop {
 }
 
 .playbar-title {
+  font-size: 14px;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
+.playbar-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
 .playbar-controls {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
 }
 
 .control {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   padding: 0;
   border: none;
-  border-radius: 50%;
   background: none;
-  color: #333;
+  color: #b3b3b3;
   cursor: pointer;
+  transition: color 0.15s ease, transform 0.1s ease;
 }
 
 .control:hover {
-  background-color: rgba(0, 0, 0, 0.06);
+  color: #fff;
 }
 
 .control svg {
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
   fill: currentColor;
 }
 
 .control.play {
-  width: 50px;
-  height: 50px;
-  background-color: #ff8126;
-  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #fff;
+  color: #000;
 }
 
 .control.play:hover {
-  background-color: #f07015;
+  color: #000;
+  transform: scale(1.06);
 }
 
 .control.play .icon-pause,
@@ -253,53 +261,149 @@ body.sidebar-open .sidebar-backdrop {
   display: block;
 }
 
+/* Active shuffle / repeat: green with a dot underneath */
+.control.toggle.active {
+  color: #1ed760;
+}
+
+.control.toggle.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+.repeat-one {
+  display: none;
+  position: absolute;
+  top: 3px;
+  right: 2px;
+  min-width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #000;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 10px;
+  text-align: center;
+}
+
+.control.repeat-one-mode .repeat-one {
+  display: block;
+}
+
 .playbar-progress {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+  width: 100%;
 }
 
-.playbar-progress input {
+.playbar-progress .slider {
   flex: 1;
-  min-width: 0;
 }
 
 .time {
-  font-size: 13px;
+  min-width: 40px;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
-  color: #666;
+  color: #b3b3b3;
+}
+
+.time:first-child {
+  text-align: right;
 }
 
 .playbar-volume {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 8px;
 }
 
 .playbar-volume svg {
-  width: 22px;
-  height: 22px;
-  fill: #666;
+  width: 16px;
+  height: 16px;
+  fill: #b3b3b3;
 }
 
-.playbar-volume input {
+.playbar-volume .slider {
   width: 100px;
 }
 
-.playbar input[type="range"] {
-  accent-color: #ff8126;
+/* Thin bar: white fill, green on hover, knob appears on hover (like Spotify) */
+.slider {
+  --fill: 0%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 12px;
+  margin: 0;
+  background: transparent;
   cursor: pointer;
+}
+
+.slider::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(to right, #fff var(--fill), #4d4d4d var(--fill));
+}
+
+.slider::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(to right, #fff var(--fill), #4d4d4d var(--fill));
+}
+
+.slider:hover::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #1ed760 var(--fill), #4d4d4d var(--fill));
+}
+
+.slider:hover::-moz-range-track {
+  background: linear-gradient(to right, #1ed760 var(--fill), #4d4d4d var(--fill));
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  margin-top: -4px;
+  border: none;
+  border-radius: 50%;
+  background-color: #fff;
+  opacity: 0;
+}
+
+.slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  background-color: #fff;
+  opacity: 0;
+}
+
+.slider:hover::-webkit-slider-thumb {
+  opacity: 1;
+}
+
+.slider:hover::-moz-range-thumb {
+  opacity: 1;
 }
 
 @media (max-width: 700px) {
   .playbar {
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 10px 16px;
-    padding: 12px 16px;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 10px 16px 12px;
   }
 
-  .playbar-progress {
-    grid-column: 1 / -1;
+  .playbar-title {
+    text-align: center;
   }
 
   .playbar-volume {

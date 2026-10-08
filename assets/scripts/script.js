@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const playButton = document.getElementById('playButton');
   const prevButton = document.getElementById('prevButton');
   const nextButton = document.getElementById('nextButton');
+  const shuffleButton = document.getElementById('shuffleButton');
+  const repeatButton = document.getElementById('repeatButton');
   const seekBar = document.getElementById('seekBar');
   const volumeBar = document.getElementById('volumeBar');
   const currentTimeLabel = document.getElementById('currentTime');
@@ -85,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     audioPlayer.src = song.path;
     songTitle.textContent = song.title;
     seekBar.value = 0;
+    updateSliderFill(seekBar);
     currentTimeLabel.textContent = '0:00';
     durationLabel.textContent = '0:00';
     history.replaceState(null, '', '?song=' + encodeURIComponent(song.path));
@@ -102,40 +105,109 @@ document.addEventListener('DOMContentLoaded', () => {
     play();
   }
 
-  playButton.addEventListener('click', togglePlay);
-  nextButton.addEventListener('click', () => playSong(currentIndex + 1));
-  prevButton.addEventListener('click', () => {
-    // Like most players: restart the song first, go to the previous one on a second click
+  // ---------- Shuffle & repeat ----------
+
+  let shuffle = false;
+  let repeatMode = 'off'; // 'off' -> 'all' -> 'one'
+  const playedHistory = [];
+
+  shuffleButton.addEventListener('click', () => {
+    shuffle = !shuffle;
+    shuffleButton.classList.toggle('active', shuffle);
+    shuffleButton.setAttribute('aria-pressed', shuffle);
+  });
+
+  repeatButton.addEventListener('click', () => {
+    repeatMode = { off: 'all', all: 'one', one: 'off' }[repeatMode];
+    repeatButton.classList.toggle('active', repeatMode !== 'off');
+    repeatButton.classList.toggle('repeat-one-mode', repeatMode === 'one');
+    repeatButton.setAttribute('aria-label', 'Repeat: ' + repeatMode);
+  });
+
+  // Index of the song after the current one, or -1 when the playlist is over
+  function nextIndex() {
+    if (shuffle && playlist.length > 1) {
+      let index;
+      do {
+        index = Math.floor(Math.random() * playlist.length);
+      } while (index === currentIndex);
+      return index;
+    }
+    const index = currentIndex + 1;
+    if (index < playlist.length) return index;
+    return repeatMode === 'all' ? 0 : -1;
+  }
+
+  function playNext() {
+    const index = nextIndex();
+    if (index === -1) {
+      // Pressing next on the last song still wraps around, like Spotify
+      playSong(0);
+      return;
+    }
+    if (currentIndex !== -1) playedHistory.push(currentIndex);
+    playSong(index);
+  }
+
+  function playPrevious() {
+    // Restart the song first, go to the previous one on a second click
     if (audioPlayer.currentTime > 3 || currentIndex === -1) {
       audioPlayer.currentTime = 0;
+    } else if (playedHistory.length) {
+      playSong(playedHistory.pop());
     } else {
       playSong(currentIndex - 1);
     }
-  });
+  }
+
+  playButton.addEventListener('click', togglePlay);
+  nextButton.addEventListener('click', playNext);
+  prevButton.addEventListener('click', playPrevious);
 
   // Automatically continue with the next song
-  audioPlayer.addEventListener('ended', () => playSong(currentIndex + 1));
+  audioPlayer.addEventListener('ended', () => {
+    if (repeatMode === 'one') {
+      audioPlayer.currentTime = 0;
+      audioPlayer.play();
+      return;
+    }
+    const index = nextIndex();
+    if (index === -1) return; // end of the playlist with repeat off
+    playedHistory.push(currentIndex);
+    playSong(index);
+  });
 
   audioPlayer.addEventListener('play', () => playbar.classList.add('playing'));
   audioPlayer.addEventListener('pause', () => playbar.classList.remove('playing'));
+
+  // ---------- Progress & volume ----------
+
+  function updateSliderFill(slider) {
+    const max = Number(slider.max) || 0;
+    const percent = max ? (slider.value / max) * 100 : 0;
+    slider.style.setProperty('--fill', percent + '%');
+  }
 
   let isSeeking = false;
 
   audioPlayer.addEventListener('loadedmetadata', () => {
     seekBar.max = audioPlayer.duration;
     durationLabel.textContent = formatTime(audioPlayer.duration);
+    updateSliderFill(seekBar);
   });
 
   audioPlayer.addEventListener('timeupdate', () => {
     if (!isSeeking) {
       seekBar.value = audioPlayer.currentTime;
       currentTimeLabel.textContent = formatTime(audioPlayer.currentTime);
+      updateSliderFill(seekBar);
     }
   });
 
   seekBar.addEventListener('input', () => {
     isSeeking = true;
     currentTimeLabel.textContent = formatTime(seekBar.value);
+    updateSliderFill(seekBar);
   });
 
   seekBar.addEventListener('change', () => {
@@ -145,7 +217,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   volumeBar.addEventListener('input', () => {
     audioPlayer.volume = volumeBar.value;
+    updateSliderFill(volumeBar);
   });
+  updateSliderFill(volumeBar);
 
   // ---------- Playbar visibility ----------
 
