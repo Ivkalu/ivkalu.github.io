@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (initialSong) {
     audioPlayer.src = initialSong;
     songTitle.textContent = titleFromPath(initialSong);
+    updateMediaSession(songTitle.textContent);
   }
 
   let hasStarted = false;
@@ -67,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
       hasStarted = true;
       start();
     }
+    resumeAudioContext();
     if (!audioPlayer.src && playlist.length) {
       loadSong(0);
     }
@@ -86,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const song = playlist[index];
     audioPlayer.src = song.path;
     songTitle.textContent = song.title;
+    updateMediaSession(song.title);
     seekBar.value = 0;
     updateSliderFill(seekBar);
     currentTimeLabel.textContent = '0:00';
@@ -180,6 +183,67 @@ document.addEventListener('DOMContentLoaded', () => {
   audioPlayer.addEventListener('play', () => playbar.classList.add('playing'));
   audioPlayer.addEventListener('pause', () => playbar.classList.remove('playing'));
 
+  // ---------- Background playback (screen off / lock screen) ----------
+
+  let audioContext = null;
+
+  function resumeAudioContext() {
+    if (audioContext && audioContext.state !== 'running') {
+      audioContext.resume().catch(() => {});
+    }
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && !audioPlayer.paused) resumeAudioContext();
+  });
+
+  // Media Session: song title and controls on the lock screen / notification,
+  // which also tells the phone that this page is playing music
+  function updateMediaSession(title) {
+    if (!('mediaSession' in navigator)) return;
+    navigator.mediaSession.metadata = new MediaMetadata({ title, artist: 'Ivkalu' });
+  }
+
+  function updatePositionState() {
+    if (!('mediaSession' in navigator) || !isFinite(audioPlayer.duration)) return;
+    try {
+      navigator.mediaSession.setPositionState({
+        duration: audioPlayer.duration,
+        position: Math.min(audioPlayer.currentTime, audioPlayer.duration),
+        playbackRate: audioPlayer.playbackRate,
+      });
+    } catch (error) {
+      // Older browsers do not support position state
+    }
+  }
+
+  if ('mediaSession' in navigator) {
+    const handlers = {
+      play: () => play(),
+      pause: () => audioPlayer.pause(),
+      previoustrack: playPrevious,
+      nexttrack: playNext,
+      seekto: details => {
+        audioPlayer.currentTime = details.seekTime;
+        updatePositionState();
+      },
+    };
+    for (const [action, handler] of Object.entries(handlers)) {
+      try {
+        navigator.mediaSession.setActionHandler(action, handler);
+      } catch (error) {
+        // Action not supported by this browser
+      }
+    }
+  }
+
+  audioPlayer.addEventListener('play', () => {
+    if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
+  });
+  audioPlayer.addEventListener('pause', () => {
+    if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
+  });
+
   // ---------- Progress & volume ----------
 
   function updateSliderFill(slider) {
@@ -194,7 +258,10 @@ document.addEventListener('DOMContentLoaded', () => {
     seekBar.max = audioPlayer.duration;
     durationLabel.textContent = formatTime(audioPlayer.duration);
     updateSliderFill(seekBar);
+    updatePositionState();
   });
+
+  audioPlayer.addEventListener('seeked', updatePositionState);
 
   audioPlayer.addEventListener('timeupdate', () => {
     if (!isSeeking) {
@@ -311,7 +378,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   function start() {
-  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+  // Mobile browsers can suspend the audio context when the screen turns off,
+  // which would silence the song, so start it again right away.
+  audioContext.addEventListener('statechange', () => {
+    if (!audioPlayer.paused) resumeAudioContext();
+  });
+
   const analyser = audioContext.createAnalyser();
 
   if (!audioPlayer._sourceNode) {
