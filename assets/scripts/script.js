@@ -22,9 +22,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const sidebarBackdrop = document.getElementById('sidebarBackdrop');
   const songList = document.getElementById('songList');
 
-  // Flat list of all songs from assets/songs.json: { title, path, button }
+  const queueButton = document.getElementById('queueButton');
+  const queueClose = document.getElementById('queueClose');
+  const queueList = document.getElementById('queueList');
+  const toast = document.getElementById('toast');
+
+  // Flat list of all songs from assets/songs.json: { title, path, row }
   let playlist = [];
-  let currentIndex = -1;
+  let currentIndex = -1;  // song that is loaded right now
+  let contextIndex = -1;  // position in the song list; queued songs do not move it
+  let currentFromQueue = false;
+  let queue = [];         // playlist indices the user added with "Add to queue"
 
   // Get song from URL
   const urlParams = new URLSearchParams(window.location.search);
@@ -83,8 +91,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function loadSong(index) {
+  function loadSong(index, fromQueue = false) {
     currentIndex = index;
+    currentFromQueue = fromQueue;
+    if (!fromQueue) contextIndex = index;
     const song = playlist[index];
     audioPlayer.src = song.path;
     songTitle.textContent = song.title;
@@ -99,25 +109,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function markCurrent(index) {
     currentIndex = index;
-    playlist.forEach((song, i) => song.button.classList.toggle('active', i === index));
+    playlist.forEach((song, i) => song.row.classList.toggle('active', i === index));
+    renderQueue();
   }
 
-  function playSong(index) {
+  function playSong(index, fromQueue = false) {
     if (!playlist.length) return;
-    loadSong((index + playlist.length) % playlist.length);
+    loadSong((index + playlist.length) % playlist.length, fromQueue);
     play();
+  }
+
+  // Starts playing from a song in the list (sidebar click, previous button)
+  function playFromList(index) {
+    if (shuffle) shuffleOrder = shuffled(index);
+    playSong(index);
   }
 
   // ---------- Shuffle & repeat ----------
 
   let shuffle = false;
+  let shuffleOrder = []; // upcoming songs while shuffle is on
   let repeatMode = 'off'; // 'off' -> 'all' -> 'one'
-  const playedHistory = [];
+  const playedHistory = []; // { index, fromQueue }
+
+  // Every song except `skip`, in random order
+  function shuffled(skip) {
+    const order = playlist.map((_, i) => i).filter(i => i !== skip);
+    for (let i = order.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [order[i], order[j]] = [order[j], order[i]];
+    }
+    return order;
+  }
 
   shuffleButton.addEventListener('click', () => {
     shuffle = !shuffle;
+    shuffleOrder = shuffle ? shuffled(contextIndex) : [];
     shuffleButton.classList.toggle('active', shuffle);
     shuffleButton.setAttribute('aria-pressed', shuffle);
+    renderQueue();
   });
 
   repeatButton.addEventListener('click', () => {
@@ -125,30 +155,48 @@ document.addEventListener('DOMContentLoaded', () => {
     repeatButton.classList.toggle('active', repeatMode !== 'off');
     repeatButton.classList.toggle('repeat-one-mode', repeatMode === 'one');
     repeatButton.setAttribute('aria-label', 'Repeat: ' + repeatMode);
+    renderQueue();
   });
 
-  // Index of the song after the current one, or -1 when the playlist is over
-  function nextIndex() {
-    if (shuffle && playlist.length > 1) {
-      let index;
-      do {
-        index = Math.floor(Math.random() * playlist.length);
-      } while (index === currentIndex);
-      return index;
+  // Songs that will play from the list after the current one (without the queue)
+  function upcoming(limit) {
+    if (shuffle) return shuffleOrder.slice(0, limit);
+    const result = [];
+    for (let step = 1; step < playlist.length && result.length < limit; step++) {
+      const index = contextIndex + step;
+      if (index >= playlist.length && repeatMode !== 'all') break;
+      result.push(index % playlist.length);
     }
-    const index = currentIndex + 1;
-    if (index < playlist.length) return index;
-    return repeatMode === 'all' ? 0 : -1;
+    return result;
   }
 
-  function playNext() {
-    const index = nextIndex();
-    if (index === -1) {
-      // Pressing next on the last song still wraps around, like Spotify
-      playSong(0);
+  // Next song from the list, or -1 when the list is over.
+  // `wrap` starts over at the end even with repeat off (the next button does).
+  function takeNextFromList(wrap) {
+    if (shuffle) {
+      if (!shuffleOrder.length) {
+        if (repeatMode !== 'all' && !wrap) return -1;
+        shuffleOrder = shuffled(contextIndex);
+      }
+      return shuffleOrder.length ? shuffleOrder.shift() : contextIndex;
+    }
+    const index = contextIndex + 1;
+    if (index < playlist.length) return index;
+    return repeatMode === 'all' || wrap ? 0 : -1;
+  }
+
+  // Queued songs go first, then the list continues where it was
+  function playNext(wrap = true) {
+    if (!playlist.length) return;
+    const previous = { index: currentIndex, fromQueue: currentFromQueue };
+    if (queue.length) {
+      if (currentIndex !== -1) playedHistory.push(previous);
+      playSong(queue.shift(), true);
       return;
     }
-    if (currentIndex !== -1) playedHistory.push(currentIndex);
+    const index = takeNextFromList(wrap);
+    if (index === -1) return;
+    if (currentIndex !== -1) playedHistory.push(previous);
     playSong(index);
   }
 
@@ -157,14 +205,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (audioPlayer.currentTime > 3 || currentIndex === -1) {
       audioPlayer.currentTime = 0;
     } else if (playedHistory.length) {
-      playSong(playedHistory.pop());
+      const entry = playedHistory.pop();
+      playSong(entry.index, entry.fromQueue);
     } else {
-      playSong(currentIndex - 1);
+      playFromList((contextIndex - 1 + playlist.length) % playlist.length);
     }
   }
 
   playButton.addEventListener('click', togglePlay);
-  nextButton.addEventListener('click', playNext);
+  nextButton.addEventListener('click', () => playNext(true));
   prevButton.addEventListener('click', playPrevious);
 
   // Automatically continue with the next song
@@ -174,11 +223,132 @@ document.addEventListener('DOMContentLoaded', () => {
       audioPlayer.play();
       return;
     }
-    const index = nextIndex();
-    if (index === -1) return; // end of the playlist with repeat off
-    playedHistory.push(currentIndex);
-    playSong(index);
+    playNext(false);
   });
+
+  // ---------- Queue ----------
+
+  const ICON_ADD = '<svg viewBox="0 0 16 16"><path d="M8 1a.75.75 0 0 1 .75.75v5.5h5.5a.75.75 0 0 1 0 1.5h-5.5v5.5a.75.75 0 0 1-1.5 0v-5.5h-5.5a.75.75 0 0 1 0-1.5h5.5v-5.5A.75.75 0 0 1 8 1z"/></svg>';
+  const ICON_REMOVE = '<svg viewBox="0 0 16 16"><path d="M2.47 2.47a.75.75 0 0 1 1.06 0L8 6.94l4.47-4.47a.75.75 0 1 1 1.06 1.06L9.06 8l4.47 4.47a.75.75 0 1 1-1.06 1.06L8 9.06l-4.47 4.47a.75.75 0 0 1-1.06-1.06L6.94 8 2.47 3.53a.75.75 0 0 1 0-1.06z"/></svg>';
+  const UPCOMING_LIMIT = 30;
+
+  let toastTimer = null;
+  function showToast(text) {
+    toast.textContent = text;
+    toast.classList.add('visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('visible'), 1800);
+  }
+
+  function addToQueue(index) {
+    queue.push(index);
+    renderQueue();
+    showToast('Added to queue');
+  }
+
+  // A row with the song title and an optional small icon button on the right
+  function songRow(title, onPlay, action) {
+    const row = document.createElement('div');
+    row.className = 'song-row';
+    const titleButton = document.createElement('button');
+    titleButton.className = 'song-title';
+    titleButton.textContent = title;
+    titleButton.addEventListener('click', onPlay);
+    row.appendChild(titleButton);
+    if (action) {
+      const button = document.createElement('button');
+      button.className = 'control';
+      button.innerHTML = action.icon;
+      button.setAttribute('aria-label', action.label);
+      button.title = action.label;
+      button.addEventListener('click', event => {
+        event.stopPropagation();
+        action.onClick();
+      });
+      row.appendChild(button);
+    }
+    return row;
+  }
+
+  function heading(text, button) {
+    const h3 = document.createElement('h3');
+    h3.textContent = text;
+    if (button) h3.appendChild(button);
+    return h3;
+  }
+
+  function renderQueue() {
+    if (!queueList) return;
+    queueList.innerHTML = '';
+    if (!playlist.length) return;
+
+    if (currentIndex !== -1) {
+      queueList.appendChild(heading('Now playing'));
+      const row = songRow(playlist[currentIndex].title, togglePlay);
+      row.classList.add('active');
+      queueList.appendChild(row);
+    }
+
+    if (queue.length) {
+      const clear = document.createElement('button');
+      clear.textContent = 'Clear';
+      clear.addEventListener('click', () => {
+        queue = [];
+        renderQueue();
+      });
+      queueList.appendChild(heading('Next in queue', clear));
+      queue.forEach((index, position) => {
+        queueList.appendChild(songRow(
+          playlist[index].title,
+          () => {
+            // Jump to this song, the songs queued before it are skipped
+            queue.splice(0, position + 1);
+            playedHistory.push({ index: currentIndex, fromQueue: currentFromQueue });
+            playSong(index, true);
+          },
+          {
+            icon: ICON_REMOVE,
+            label: 'Remove from queue',
+            onClick: () => {
+              queue.splice(position, 1);
+              renderQueue();
+            },
+          },
+        ));
+      });
+    }
+
+    const next = upcoming(UPCOMING_LIMIT);
+    queueList.appendChild(heading('Next up'));
+    if (!next.length) {
+      const empty = document.createElement('p');
+      empty.className = 'queue-empty';
+      empty.textContent = 'Nothing else to play.';
+      queueList.appendChild(empty);
+    }
+    next.forEach((index, position) => {
+      queueList.appendChild(songRow(
+        playlist[index].title,
+        () => {
+          // Skip ahead in the list to this song
+          if (shuffle) shuffleOrder.splice(0, position + 1);
+          playedHistory.push({ index: currentIndex, fromQueue: currentFromQueue });
+          playSong(index);
+        },
+        { icon: ICON_ADD, label: 'Add to queue', onClick: () => addToQueue(index) },
+      ));
+    });
+  }
+
+  function setQueueOpen(open) {
+    document.body.classList.toggle('queue-open', open);
+    queueButton.classList.toggle('active', open);
+    queueButton.setAttribute('aria-pressed', open);
+    if (open) renderQueue();
+  }
+
+  queueButton.addEventListener('click', () => setQueueOpen(!document.body.classList.contains('queue-open')));
+  queueClose.addEventListener('click', () => setQueueOpen(false));
 
   audioPlayer.addEventListener('play', () => playbar.classList.add('playing'));
   audioPlayer.addEventListener('pause', () => playbar.classList.remove('playing'));
@@ -222,7 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
       play: () => play(),
       pause: () => audioPlayer.pause(),
       previoustrack: playPrevious,
-      nexttrack: playNext,
+      nexttrack: () => playNext(true),
       seekto: details => {
         audioPlayer.currentTime = details.seekTime;
         updatePositionState();
@@ -343,33 +513,36 @@ document.addEventListener('DOMContentLoaded', () => {
   sidebarClose.addEventListener('click', () => setSidebarOpen(false));
   sidebarBackdrop.addEventListener('click', () => setSidebarOpen(false));
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') setSidebarOpen(false);
+    if (event.key !== 'Escape') return;
+    setSidebarOpen(false);
+    setQueueOpen(false);
   });
 
   fetch('assets/songs.json', { cache: 'no-cache' })
     .then(response => response.json())
     .then(categories => {
       for (const category of categories) {
-        const heading = document.createElement('h3');
-        heading.textContent = category.name;
-        songList.appendChild(heading);
+        songList.appendChild(heading(category.name));
 
         for (const song of category.songs) {
           const index = playlist.length;
-          const button = document.createElement('button');
-          button.textContent = song.title;
-          button.addEventListener('click', () => {
-            playSong(index);
-            setSidebarOpen(false);
-          });
-          songList.appendChild(button);
-          playlist.push({ ...song, button });
+          const row = songRow(
+            song.title,
+            () => {
+              playFromList(index);
+              setSidebarOpen(false);
+            },
+            { icon: ICON_ADD, label: 'Add to queue', onClick: () => addToQueue(index) },
+          );
+          songList.appendChild(row);
+          playlist.push({ ...song, row });
         }
       }
 
       const initialIndex = playlist.findIndex(song => song.path === initialSong);
       if (initialIndex !== -1) {
         // The song is already loaded from the URL, only highlight it
+        contextIndex = initialIndex;
         markCurrent(initialIndex);
       } else if (!initialSong && playlist.length) {
         loadSong(0);
