@@ -575,79 +575,119 @@ document.addEventListener('DOMContentLoaded', () => {
     analyser.connect(audioContext.destination);
   }
 
-  analyser.fftSize = 1024; // much better low-frequency resolution
-  const bufferLength = analyser.frequencyBinCount; // 512
-  const dataArray = new Uint8Array(bufferLength);
+  // How the bars are computed, the way audio spectrum analysers do it:
+  // - bands are spaced logarithmically from 30 Hz to 16 kHz (MP3s are cut off
+  //   around 16 kHz, so anything above would always be empty)
+  // - a big FFT gives enough resolution for the narrow bass bands
+  // - music loses about 4.5 dB per octave, so that slope is added back,
+  //   otherwise the bass always looks stronger than the rest
+  // - each band is partly evened out against its own long-term level, so dark
+  //   songs still move in the highs and bass-heavy songs don't fill everything
+  // - the dB range follows the loudness of the song (slow automatic gain)
+  // - bars rise fast and fall slowly
+  const sampleRate = audioContext.sampleRate;
+  analyser.fftSize = 8192;
+  analyser.smoothingTimeConstant = 0; // smoothing is done below
+  const spectrum = new Float32Array(analyser.frequencyBinCount);
+  const binHz = sampleRate / analyser.fftSize;
 
   const numBars = 32;
-  wave.innerHTML = '';
+  const MIN_HZ = 30;
+  const MAX_HZ = Math.min(16000, sampleRate / 2);
+  const TILT_DB_PER_OCTAVE = 4.5;
+  const RANGE_DB = 50;          // dB shown between an empty and a full bar
+  const ATTACK_SECONDS = 0.03;
+  const RELEASE_SECONDS = 0.25;
+  const GAIN_FALL_DB_PER_SECOND = 3;
+  const EQ_STRENGTH = 0.5;      // 0 = true spectrum, 1 = every band evened out
+  const EQ_SECONDS = 8;         // how long the long-term level remembers
 
+  wave.innerHTML = '';
+  const bars = [];
   for (let i = 0; i < numBars; i++) {
     const bar = document.createElement('div');
     bar.classList.add('bar');
     wave.appendChild(bar);
+    bars.push(bar);
   }
 
-  const sampleRate = audioContext.sampleRate;
-  const nyquist = sampleRate / 2;
-
-  function freqToMel(freq) {
-    return 2595 * Math.log10(1 + freq / 700);
+  const bands = [];
+  for (let i = 0; i < numBars; i++) {
+    const low = MIN_HZ * (MAX_HZ / MIN_HZ) ** (i / numBars);
+    const high = MIN_HZ * (MAX_HZ / MIN_HZ) ** ((i + 1) / numBars);
+    const center = Math.sqrt(low * high);
+    bands.push({
+      center,
+      firstBin: Math.ceil(low / binHz),
+      lastBin: Math.min(spectrum.length - 1, Math.floor(high / binHz)),
+      tilt: TILT_DB_PER_OCTAVE * Math.log2(center / 1000),
+    });
   }
 
-  function melToFreq(mel) {
-    return 700 * (10 ** (mel / 2595) - 1);
-  }
-
-  // Compute mel band edges as FFT bin indices
-  const melLow = freqToMel(20); // avoid 0Hz
-  const melHigh = freqToMel(nyquist);
-  const melBandEdges = [];
-
-  for (let i = 0; i <= numBars; i++) {
-    const mel = melLow + (i / numBars) * (melHigh - melLow);
-    const freq = melToFreq(mel);
-    let bin = Math.floor((freq / nyquist) * bufferLength);
-    bin = Math.max(0, Math.min(bufferLength - 1, bin));
-    melBandEdges.push(bin);
-  }
-
-  // Ensure strictly increasing edges
-  for (let i = 1; i < melBandEdges.length; i++) {
-    if (melBandEdges[i] <= melBandEdges[i - 1]) {
-      melBandEdges[i] = melBandEdges[i - 1] + 1;
+  // Loudness of one band in dB: mean power of its bins, or for bands narrower
+  // than one bin, interpolated at the band's centre frequency
+  function bandDb(band) {
+    if (band.lastBin >= band.firstBin) {
+      let power = 0;
+      for (let j = band.firstBin; j <= band.lastBin; j++) power += 10 ** (spectrum[j] / 10);
+      return 10 * Math.log10(power / (band.lastBin - band.firstBin + 1));
     }
+    const position = band.center / binHz;
+    const below = Math.floor(position);
+    const fraction = position - below;
+    return spectrum[below] * (1 - fraction) + spectrum[below + 1] * fraction;
   }
 
-  function animate() {
-    analyser.getByteFrequencyData(dataArray);
-    const bars = document.querySelectorAll('.bar');
+  const levels = new Float32Array(numBars);
+  const longTermDb = new Float32Array(numBars).fill(NaN);
+  let peakDb = -30;
+  let lastTime = performance.now();
 
+  function animate(now) {
+    const dt = Math.min(0.1, Math.max(0, (now - lastTime) / 1000)) || 1 / 60;
+    lastTime = now;
+    analyser.getFloatFrequencyData(spectrum);
+    for (let j = 0; j < spectrum.length; j++) {
+      if (!(spectrum[j] > -160)) spectrum[j] = -160; // silence comes back as -Infinity
+    }
+
+    const raw = bands.map(band => bandDb(band) + band.tilt);
+    const blend = 1 - Math.exp(-dt / EQ_SECONDS);
+    raw.forEach((db, i) => {
+      if (db < -120) return; // silence (pause, between songs) is not part of the song
+      longTermDb[i] = Number.isNaN(longTermDb[i]) ? db : longTermDb[i] + (db - longTermDb[i]) * blend;
+    });
+    const known = Array.from(longTermDb).filter(v => !Number.isNaN(v));
+    const average = known.length ? known.reduce((a, b) => a + b, 0) / known.length : 0;
+
+    let loudest = -Infinity;
+    const values = raw.map((db, i) => {
+      const value = Number.isNaN(longTermDb[i]) ? db : db + (average - longTermDb[i]) * EQ_STRENGTH;
+      loudest = Math.max(loudest, value);
+      return value;
+    });
+
+    // Automatic gain: jump up to new peaks, slowly come back down
+    peakDb = Math.max(loudest, peakDb - GAIN_FALL_DB_PER_SECOND * dt, -60);
+
+    let bass = 0;
     for (let i = 0; i < numBars; i++) {
-      const start = melBandEdges[i];
-      const end = melBandEdges[i + 1];
-      let sum = 0;
-
-      for (let j = start; j < end && j < dataArray.length; j++) {
-        sum += dataArray[j];
-      }
-
-      const count = end - start || 1;
-      const avg = sum / count;
-      const height = (avg / 255) * 50;
-      bars[i].style.height = `${height}vh`;
+      const target = Math.min(1, Math.max(0, (values[i] - (peakDb - RANGE_DB)) / RANGE_DB));
+      const seconds = target > levels[i] ? ATTACK_SECONDS : RELEASE_SECONDS;
+      levels[i] += (target - levels[i]) * (1 - Math.exp(-dt / seconds));
+      bars[i].style.height = `${levels[i] * 50}vh`;
+      if (i < numBars / 4) bass += levels[i];
     }
 
-    // Circle pulse
-    const avgEnergy = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
-    const scale = 1 + avgEnergy / 512;
+    // Circle pulse follows the bass, like a kick drum
+    const scale = 1 + (bass / (numBars / 4)) * 0.3;
     const hoverScale = isHovered ? 1.15 : 1;
     circle.style.transform = `scale(${scale * hoverScale})`;
 
     requestAnimationFrame(animate);
   }
 
-  animate();
+  requestAnimationFrame(animate);
 }
 
 
