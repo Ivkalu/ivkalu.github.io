@@ -245,10 +245,6 @@
         "path": "assets/songs/Album/1.mp3"
       },
       {
-        "title": "10",
-        "path": "assets/songs/Album/10.mp3"
-      },
-      {
         "title": "2",
         "path": "assets/songs/Album/2.mp3"
       },
@@ -265,10 +261,6 @@
         "path": "assets/songs/Album/5.mp3"
       },
       {
-        "title": "5_bonus_full",
-        "path": "assets/songs/Album/5_bonus_full.mp3"
-      },
-      {
         "title": "6",
         "path": "assets/songs/Album/6.mp3"
       },
@@ -283,7 +275,16 @@
       {
         "title": "9",
         "path": "assets/songs/Album/9.mp3"
+      },
+      {
+        "title": "10",
+        "path": "assets/songs/Album/10.mp3"
+      },
+      {
+        "title": "5_bonus_full",
+        "path": "assets/songs/Album/5_bonus_full.mp3"
       }
-    ]
+    ],
+    "cover": "assets/songs/Album/cover.webp"
   }
 ]

@@ -110,7 +110,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function markCurrent(index) {
     currentIndex = index;
     playlist.forEach((song, i) => song.row.classList.toggle('active', i === index));
+    setCover(playlist[index].cover);
     renderQueue();
+  }
+
+  // Folders with a cover image show it inside the circle instead of the green
+  function setCover(path) {
+    circle.classList.toggle('has-cover', Boolean(path));
+    circle.style.backgroundImage = path ? `url("${encodeURI(path)}")` : '';
   }
 
   function playSong(index, fromQueue = false) {
@@ -535,7 +542,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { icon: ICON_ADD, label: 'Add to queue', onClick: () => addToQueue(index) },
           );
           songList.appendChild(row);
-          playlist.push({ ...song, row });
+          playlist.push({ ...song, cover: category.cover, row });
         }
       }
 

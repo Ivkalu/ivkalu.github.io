@@ -16,6 +16,12 @@ body {
   z-index: 10;
 }
 
+.circle.has-cover {
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+}
+
 .circle:hover {
   transform: scale(1.15);
   transition: transform 0.2s ease-out;
