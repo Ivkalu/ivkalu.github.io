@@ -236,5 +236,54 @@
         "path": "assets/songs/6 Drill/Josipa Lisac.mp3"
       }
     ]
+  },
+  {
+    "name": "Album",
+    "songs": [
+      {
+        "title": "1",
+        "path": "assets/songs/Album/1.mp3"
+      },
+      {
+        "title": "10",
+        "path": "assets/songs/Album/10.mp3"
+      },
+      {
+        "title": "2",
+        "path": "assets/songs/Album/2.mp3"
+      },
+      {
+        "title": "3",
+        "path": "assets/songs/Album/3.mp3"
+      },
+      {
+        "title": "4",
+        "path": "assets/songs/Album/4.mp3"
+      },
+      {
+        "title": "5",
+        "path": "assets/songs/Album/5.mp3"
+      },
+      {
+        "title": "5_bonus_full",
+        "path": "assets/songs/Album/5_bonus_full.mp3"
+      },
+      {
+        "title": "6",
+        "path": "assets/songs/Album/6.mp3"
+      },
+      {
+        "title": "7",
+        "path": "assets/songs/Album/7.mp3"
+      },
+      {
+        "title": "8",
+        "path": "assets/songs/Album/8.mp3"
+      },
+      {
+        "title": "9",
+        "path": "assets/songs/Album/9.mp3"
+      }
+    ]
   }
 ]
