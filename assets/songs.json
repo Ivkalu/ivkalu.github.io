@@ -193,12 +193,36 @@
         "path": "assets/songs/3 Kult sfera/1 S vremenom je sve bolje.mp3"
       },
       {
+        "title": "2023_03_13_kult_sfera3_2",
+        "path": "assets/songs/3 Kult sfera/2023_03_13_kult_sfera3_2.mp3"
+      },
+      {
+        "title": "2023_07_01",
+        "path": "assets/songs/3 Kult sfera/2023_07_01.mp3"
+      },
+      {
+        "title": "2024_04_24",
+        "path": "assets/songs/3 Kult sfera/2024_04_24.mp3"
+      },
+      {
+        "title": "2024_08_31",
+        "path": "assets/songs/3 Kult sfera/2024_08_31.mp3"
+      },
+      {
         "title": "Kult sfera 2",
         "path": "assets/songs/3 Kult sfera/Kult sfera 2.mp3"
       },
       {
         "title": "Kult sfera 3",
         "path": "assets/songs/3 Kult sfera/Kult sfera 3.mp3"
+      },
+      {
+        "title": "next_jam",
+        "path": "assets/songs/3 Kult sfera/next_jam.mp3"
+      },
+      {
+        "title": "WhatsApp Audio 2024-11-24 at 19.19.56_fcc249eb",
+        "path": "assets/songs/3 Kult sfera/WhatsApp Audio 2024-11-24 at 19.19.56_fcc249eb.mp3"
       }
     ]
   },
@@ -281,8 +305,16 @@
         "path": "assets/songs/Album/10.mp3"
       },
       {
+        "title": "2_happy_2",
+        "path": "assets/songs/Album/2_happy_2.mp3"
+      },
+      {
         "title": "5_bonus_full",
         "path": "assets/songs/Album/5_bonus_full.mp3"
+      },
+      {
+        "title": "9_13",
+        "path": "assets/songs/Album/9_13.mp3"
       }
     ],
     "cover": "assets/songs/Album/cover.webp"
