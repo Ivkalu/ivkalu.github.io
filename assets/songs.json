@@ -3,16 +3,140 @@
     "name": "Electronic",
     "songs": [
       {
+        "title": "2023_05_14_techno",
+        "path": "assets/songs/1 Electronic/2023_05_14_techno.mp3"
+      },
+      {
+        "title": "2023_05_15_TerraformSeq_2",
+        "path": "assets/songs/1 Electronic/2023_05_15_TerraformSeq_2.mp3"
+      },
+      {
+        "title": "2023_05_16",
+        "path": "assets/songs/1 Electronic/2023_05_16.mp3"
+      },
+      {
+        "title": "2024_08_13",
+        "path": "assets/songs/1 Electronic/2024_08_13.mp3"
+      },
+      {
+        "title": "2024_11_19_its_the_melody",
+        "path": "assets/songs/1 Electronic/2024_11_19_its_the_melody.mp3"
+      },
+      {
         "title": "2024_12_27",
         "path": "assets/songs/1 Electronic/2024_12_27.mp3"
+      },
+      {
+        "title": "2024_12_29_heavy_metal",
+        "path": "assets/songs/1 Electronic/2024_12_29_heavy_metal.mp3"
+      },
+      {
+        "title": "2024_12_29_heavy_metal_bad",
+        "path": "assets/songs/1 Electronic/2024_12_29_heavy_metal_bad.mp3"
+      },
+      {
+        "title": "2024_12_30",
+        "path": "assets/songs/1 Electronic/2024_12_30.mp3"
+      },
+      {
+        "title": "2024_12_31",
+        "path": "assets/songs/1 Electronic/2024_12_31.mp3"
+      },
+      {
+        "title": "2025_01_23_sampl",
+        "path": "assets/songs/1 Electronic/2025_01_23_sampl.mp3"
       },
       {
         "title": "2025_01_31",
         "path": "assets/songs/1 Electronic/2025_01_31.mp3"
       },
       {
+        "title": "2025_02_04_experiment_3",
+        "path": "assets/songs/1 Electronic/2025_02_04_experiment_3.mp3"
+      },
+      {
+        "title": "2025_02_04_experiment_4",
+        "path": "assets/songs/1 Electronic/2025_02_04_experiment_4.mp3"
+      },
+      {
         "title": "2025_02_04_experiment_4_n",
         "path": "assets/songs/1 Electronic/2025_02_04_experiment_4_n.mp3"
+      },
+      {
+        "title": "2025_02_14",
+        "path": "assets/songs/1 Electronic/2025_02_14.mp3"
+      },
+      {
+        "title": "2025_02_24",
+        "path": "assets/songs/1 Electronic/2025_02_24.mp3"
+      },
+      {
+        "title": "2025_03_09",
+        "path": "assets/songs/1 Electronic/2025_03_09.mp3"
+      },
+      {
+        "title": "2025_03_09_v2",
+        "path": "assets/songs/1 Electronic/2025_03_09_v2.mp3"
+      },
+      {
+        "title": "2025_03_13",
+        "path": "assets/songs/1 Electronic/2025_03_13.mp3"
+      },
+      {
+        "title": "2025_03_29",
+        "path": "assets/songs/1 Electronic/2025_03_29.mp3"
+      },
+      {
+        "title": "2025_03_30",
+        "path": "assets/songs/1 Electronic/2025_03_30.mp3"
+      },
+      {
+        "title": "2025_04_16",
+        "path": "assets/songs/1 Electronic/2025_04_16.mp3"
+      },
+      {
+        "title": "2025_04_25",
+        "path": "assets/songs/1 Electronic/2025_04_25.mp3"
+      },
+      {
+        "title": "2025_04_26",
+        "path": "assets/songs/1 Electronic/2025_04_26.mp3"
+      },
+      {
+        "title": "2025_06_06",
+        "path": "assets/songs/1 Electronic/2025_06_06.mp3"
+      },
+      {
+        "title": "2025_06_08",
+        "path": "assets/songs/1 Electronic/2025_06_08.mp3"
+      },
+      {
+        "title": "2025_07_04",
+        "path": "assets/songs/1 Electronic/2025_07_04.mp3"
+      },
+      {
+        "title": "2025_07_08",
+        "path": "assets/songs/1 Electronic/2025_07_08.mp3"
+      },
+      {
+        "title": "2025_07_08_140bpm",
+        "path": "assets/songs/1 Electronic/2025_07_08_140bpm.mp3"
+      },
+      {
+        "title": "2025_08_22",
+        "path": "assets/songs/1 Electronic/2025_08_22.mp3"
+      },
+      {
+        "title": "2025_08_25",
+        "path": "assets/songs/1 Electronic/2025_08_25.mp3"
+      },
+      {
+        "title": "2025_09_10_dingdongbingbong",
+        "path": "assets/songs/1 Electronic/2025_09_10_dingdongbingbong.mp3"
+      },
+      {
+        "title": "2025_09_23",
+        "path": "assets/songs/1 Electronic/2025_09_23.mp3"
       },
       {
         "title": "Aphex twin 1",
@@ -25,6 +149,10 @@
       {
         "title": "It's the melody",
         "path": "assets/songs/1 Electronic/It's the melody.mp3"
+      },
+      {
+        "title": "sheeeesh",
+        "path": "assets/songs/1 Electronic/sheeeesh.mp3"
       }
     ]
   },
