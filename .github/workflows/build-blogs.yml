@@ -1,0 +1,50 @@
+name: Build blog
+
+on:
+  push:
+    paths:
+      - 'blogs/posts/**'
+      - '.github/scripts/generate_blogs.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-blogs-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    # Prevent infinite loops when the workflow commits the generated pages back.
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Markdown
+        run: pip install markdown==3.7
+
+      - name: Generate blog pages
+        run: python3 .github/scripts/generate_blogs.py
+
+      - name: Commit blog pages
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -A blogs
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "workflow commit: update blog pages [skip ci]"
+          # The song list workflow may have pushed in the meantime
+          git pull --rebase
+          git push
