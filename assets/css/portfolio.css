@@ -205,3 +205,7 @@ a.project-link:hover .project, a.thesis-link:hover .thesis {
     text-decoration: none;
     color: inherit;
 }
+/* Space between a page title and the links under it (music, blog, games) */
+header h1 + .contact {
+    margin-top: 26px;
+}

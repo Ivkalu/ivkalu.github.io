@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1f2a44">
+  <title>Bela | Ivkalu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../games.css">
+  <link rel="stylesheet" href="bela.css">
+</head>
+<body>
+  <div class="topbar">
+    <a href="../" aria-label="Natrag na igre">‹ Igre</a>
+    <h1>Bela</h1>
+    <button id="menuButton" type="button" aria-label="Postavke">⋯</button>
+  </div>
+
+  <main>
+    <div id="winBanner" class="banner" hidden></div>
+
+    <div class="score">
+      <div class="team mi">
+        <span class="team-name">MI</span>
+        <span class="team-total" id="totalMi">0</span>
+        <span class="team-left" id="leftMi"></span>
+      </div>
+      <div class="team vi">
+        <span class="team-name">VI</span>
+        <span class="team-total" id="totalVi">0</span>
+        <span class="team-left" id="leftVi"></span>
+      </div>
+    </div>
+    <p class="matches muted small" id="matches"></p>
+
+    <div class="card hands-card">
+      <table class="hands">
+        <thead><tr><th>#</th><th>MI</th><th>VI</th></tr></thead>
+        <tbody id="hands"></tbody>
+      </table>
+      <p class="muted small empty" id="emptyHands">Još nema upisanih ruku. Dodirni red za izmjenu.</p>
+    </div>
+  </main>
+
+  <div class="bottombar">
+    <div>
+      <button class="btn" id="undoButton" type="button" aria-label="Poništi zadnju ruku">↶</button>
+      <button class="btn primary big" id="addButton" type="button" style="flex:1">+ Upiši ruku</button>
+    </div>
+  </div>
+
+  <!-- Entering or editing a hand -->
+  <div class="sheet-backdrop" id="handSheet" hidden>
+    <div class="sheet" role="dialog" aria-labelledby="handTitle">
+      <h3 id="handTitle">Nova ruka</h3>
+
+      <div class="card">
+        <span class="label">Tko je zvao adut</span>
+        <div class="seg" id="callerSeg">
+          <button type="button" data-value="mi">MI</button>
+          <button type="button" data-value="vi">VI</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="label">Bodovi iz karata (ukupno 162)</span>
+        <div class="row">
+          <label class="pts mi">MI<input id="ptsMi" type="number" inputmode="numeric" min="0" max="162" placeholder="0"></label>
+          <label class="pts vi">VI<input id="ptsVi" type="number" inputmode="numeric" min="0" max="162" placeholder="0"></label>
+        </div>
+        <span class="label" style="margin-top:12px">Štiglja (svi štihovi, +90)</span>
+        <div class="seg" id="stigljaSeg">
+          <button type="button" data-value="">Nema</button>
+          <button type="button" data-value="mi">MI</button>
+          <button type="button" data-value="vi">VI</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="label">Zvanja MI <span id="zvanjaMiSum" class="zsum"></span></span>
+        <div class="zvanja" data-team="mi"></div>
+        <span class="label" style="margin-top:8px">Zvanja VI <span id="zvanjaViSum" class="zsum"></span></span>
+        <div class="zvanja" data-team="vi"></div>
+      </div>
+
+      <div class="card result" id="handResult"></div>
+
+      <div class="row">
+        <button class="btn danger" id="deleteHand" type="button">Obriši</button>
+        <button class="btn" id="cancelHand" type="button">Odustani</button>
+        <button class="btn primary" id="saveHand" type="button">Spremi</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings -->
+  <div class="sheet-backdrop" id="menuSheet" hidden>
+    <div class="sheet" role="dialog" aria-labelledby="menuTitle">
+      <h3 id="menuTitle">Postavke</h3>
+      <div class="card">
+        <span class="label">Igra se do</span>
+        <div class="seg" id="targetSeg">
+          <button type="button" data-value="501">501</button>
+          <button type="button" data-value="701">701</button>
+          <button type="button" data-value="1001">1001</button>
+        </div>
+      </div>
+      <div class="card">
+        <label class="toggle"><input type="checkbox" id="wakeLock"> Drži ekran upaljen dok je ova stranica otvorena</label>
+        <p class="muted small" id="wakeLockNote"></p>
+      </div>
+      <div class="card">
+        <button class="btn block" id="newMatch" type="button">Nova partija (zadrži broj pobjeda)</button>
+        <p></p>
+        <button class="btn block danger" id="resetAll" type="button">Obriši sve i kreni ispočetka</button>
+      </div>
+      <p class="muted small">Sve se sprema u ovaj preglednik na ovom uređaju: rezultat ostaje i kad se ekran ugasi, osvježiš stranicu ili ponovno upališ mobitel.</p>
+      <button class="btn block" id="closeMenu" type="button">Zatvori</button>
+    </div>
+  </div>
+
+  <script src="bela.js"></script>
+</body>
+</html>

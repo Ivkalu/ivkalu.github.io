@@ -1,0 +1,35 @@
+.players .player {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  border-top: 1px solid var(--border);
+}
+.players .player:first-child { border-top: none; }
+.players .player span { flex: 1; font-size: 17px; }
+.players .player button { min-height: 36px; }
+.stepper { display: flex; align-items: center; gap: 10px; }
+.stepper span { flex: 1; }
+.stepper strong { min-width: 24px; text-align: center; font-size: 20px; }
+.stepper .btn { min-width: 44px; padding: 0; }
+.reveal { text-align: center; padding: 28px 16px; }
+.reveal .who { font: 700 30px/1.2 'Roboto', sans-serif; margin: 6px 0 18px; }
+.secret {
+  margin: 0 0 18px;
+  padding: 28px 12px;
+  border-radius: 14px;
+  background: var(--navy);
+  color: #fff;
+  font: 700 34px/1.2 'Roboto', sans-serif;
+}
+.secret.white { background: #fff; color: var(--navy); border: 3px dashed var(--navy); }
+.secret small { display: block; font: 15px/1.4 'Segoe UI', sans-serif; opacity: .8; margin-top: 8px; }
+.alive .player { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-top: 1px solid var(--border); }
+.alive .player:first-child { border-top: none; }
+.alive .player span { flex: 1; font-size: 18px; }
+.alive .player.out span { text-decoration: line-through; color: var(--muted); }
+.role-tag { font-size: 13px; padding: 2px 8px; border-radius: 10px; background: var(--bg); color: var(--muted); }
+.role-tag.white { background: var(--navy); color: #fff; }
+.role-tag.undercover { background: var(--orange); color: #fff; }
+.rules p { margin: 0 0 10px; }
+.hint { text-align: center; }

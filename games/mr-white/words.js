@@ -1,0 +1,20 @@
+// Word pairs: [civilians' word, undercover's word]. Mr. White gets neither.
+const WORD_PAIRS = [
+  ['Pizza', 'Burek'], ['Mačka', 'Pas'], ['More', 'Jezero'], ['Kava', 'Čaj'], ['Pivo', 'Vino'],
+  ['Sunce', 'Mjesec'], ['Gitara', 'Violina'], ['Klavir', 'Harmonika'], ['Nogomet', 'Rukomet'], ['Košarka', 'Odbojka'],
+  ['Zagreb', 'Split'], ['Ljeto', 'Proljeće'], ['Snijeg', 'Kiša'], ['Bicikl', 'Romobil'], ['Auto', 'Kamion'],
+  ['Avion', 'Helikopter'], ['Brod', 'Podmornica'], ['Liječnik', 'Medicinska sestra'], ['Učitelj', 'Profesor'], ['Policajac', 'Vatrogasac'],
+  ['Jabuka', 'Kruška'], ['Banana', 'Ananas'], ['Jagoda', 'Malina'], ['Krumpir', 'Mrkva'], ['Sir', 'Jogurt'],
+  ['Čokolada', 'Sladoled'], ['Torta', 'Palačinka'], ['Kruh', 'Kifla'], ['Sarma', 'Gulaš'], ['Ćevapi', 'Pljeskavica'],
+  ['Mobitel', 'Tablet'], ['Laptop', 'Televizor'], ['Instagram', 'TikTok'], ['Netflix', 'YouTube'], ['Harry Potter', 'Gospodar prstenova'],
+  ['Batman', 'Superman'], ['Vampir', 'Zombi'], ['Duh', 'Vještica'], ['Gusar', 'Vitez'], ['Kralj', 'Predsjednik'],
+  ['Bolnica', 'Ljekarna'], ['Škola', 'Fakultet'], ['Kino', 'Kazalište'], ['Plaža', 'Bazen'], ['Planina', 'Brdo'],
+  ['Šuma', 'Park'], ['Dvorac', 'Palača'], ['Crkva', 'Džamija'], ['Vjenčanje', 'Rođendan'], ['Božić', 'Uskrs'],
+  ['Lav', 'Tigar'], ['Slon', 'Žirafa'], ['Majmun', 'Gorila'], ['Pingvin', 'Galeb'], ['Morski pas', 'Dupin'],
+  ['Zmija', 'Gušter'], ['Pčela', 'Osa'], ['Leptir', 'Vilin konjic'], ['Konj', 'Magarac'], ['Krava', 'Koza'],
+  ['Kišobran', 'Kabanica'], ['Naočale', 'Leće'], ['Sat', 'Narukvica'], ['Čarape', 'Rukavice'], ['Tenisice', 'Papuče'],
+  ['Četkica za zube', 'Češalj'], ['Tuš', 'Kada'], ['Krevet', 'Kauč'], ['Hladnjak', 'Zamrzivač'], ['Pećnica', 'Mikrovalna'],
+  ['Bela', 'Briškula'], ['Šah', 'Dama'], ['Poker', 'Remi'], ['Kocka', 'Domino'], ['Lego', 'Puzzle'],
+  ['Rock', 'Metal'], ['Jazz', 'Blues'], ['Gitarist', 'Bubnjar'], ['Koncert', 'Festival'], ['DJ', 'Pjevač'],
+  ['Programer', 'Haker'], ['Robot', 'Kiborg'], ['Umjetna inteligencija', 'Kalkulator'], ['Raketa', 'Satelit'], ['Astronaut', 'Pilot'],
+];

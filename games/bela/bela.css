@@ -1,0 +1,37 @@
+.score { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 8px;
+  border-radius: 14px;
+  color: #fff;
+}
+.team.mi { background: var(--teal); }
+.team.vi { background: var(--orange); }
+.team-name { font: 700 18px/1 'Roboto', sans-serif; letter-spacing: .12em; opacity: .9; }
+.team-total { font: 700 56px/1.1 'Roboto', sans-serif; font-variant-numeric: tabular-nums; }
+.team-left { font-size: 13px; opacity: .9; min-height: 1.2em; }
+.matches { text-align: center; margin: 8px 0 12px; }
+.hands-card { padding: 4px 0; }
+.hands { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.hands th { font-size: 13px; color: var(--muted); font-weight: 600; padding: 8px; }
+.hands td { text-align: center; padding: 10px 8px; border-top: 1px solid var(--border); font-size: 18px; }
+.hands td:first-child, .hands th:first-child { width: 44px; color: var(--muted); font-size: 14px; }
+.hands tbody tr { cursor: pointer; }
+.hands tbody tr:active { background: var(--bg); }
+.hands .mark { display: block; font-size: 11px; color: var(--muted); }
+.hands .pad { color: var(--danger); }
+.empty { text-align: center; padding: 12px; margin: 0; }
+.pts { display: flex; flex-direction: column; gap: 4px; font-weight: 700; font-size: 14px; }
+.pts.mi { color: var(--teal-dark); }
+.pts.vi { color: var(--orange); }
+.pts input { font-size: 24px; text-align: center; font-weight: 700; color: var(--text); }
+.zsum { color: var(--text); text-transform: none; letter-spacing: 0; }
+.zvanja .chip { min-width: 52px; justify-content: center; }
+.zvanja .chip.added { background: var(--navy); border-color: var(--navy); color: #fff; }
+.result { text-align: center; font-size: 17px; }
+.result .big { font: 700 28px/1.2 'Roboto', sans-serif; font-variant-numeric: tabular-nums; }
+.result .warn { color: var(--danger); font-weight: 700; }
+.toggle { display: flex; gap: 10px; align-items: center; font-weight: 600; }
+.toggle input { width: 22px; height: 22px; }

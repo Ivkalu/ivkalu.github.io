@@ -1,0 +1,33 @@
+.person { display: inline-flex; }
+.linklike { border: none; background: none; color: var(--teal-dark); font: inherit; text-transform: none; letter-spacing: 0; cursor: pointer; padding: 0 4px; text-decoration: underline; }
+.error { color: var(--danger); min-height: 1em; margin: 6px 0; }
+.transfer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+  font-size: 17px;
+}
+.transfer:first-child { border-top: none; }
+.transfer .arrow { color: var(--muted); }
+.transfer .amount { margin-left: auto; font-weight: 700; font-variant-numeric: tabular-nums; }
+.balances { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.balances th { font-size: 12px; color: var(--muted); font-weight: 600; text-align: right; padding: 4px; }
+.balances td { padding: 8px 4px; border-top: 1px solid var(--border); text-align: right; }
+.balances td:first-child { text-align: left; font-weight: 600; }
+.plus { color: var(--teal-dark); }
+.minus { color: var(--danger); }
+.expense {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+  cursor: pointer;
+}
+.expense:first-child { border-top: none; }
+.expense .what { flex: 1; min-width: 0; }
+.expense .what strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.expense .amount { font-weight: 700; font-variant-numeric: tabular-nums; }
+.expense .btn { min-height: 36px; padding: 0 10px; }

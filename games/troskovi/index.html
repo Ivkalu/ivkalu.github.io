@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1f2a44">
+  <title>Podijeli troškove | Ivkalu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../games.css">
+  <link rel="stylesheet" href="troskovi.css">
+</head>
+<body>
+  <div class="topbar">
+    <a href="../" aria-label="Natrag na igre">‹ Igre</a>
+    <h1>Troškovi</h1>
+    <button id="resetButton" type="button">Očisti</button>
+  </div>
+  <main>
+    <div class="card">
+      <h2>Ekipa</h2>
+      <div id="people"></div>
+      <form class="row" id="personForm" style="margin-top:6px">
+        <input id="personName" placeholder="Ime" autocomplete="off" maxlength="24">
+        <button class="btn primary" type="submit" style="flex:0 0 auto">Dodaj</button>
+      </form>
+    </div>
+
+    <div class="card" id="expenseCard">
+      <h2 id="expenseTitle">Novi trošak</h2>
+      <form id="expenseForm">
+        <div class="row">
+          <label style="flex:1.2"><span class="label">Platio/la</span><select id="payer"></select></label>
+          <label><span class="label">Iznos (€)</span><input id="amount" inputmode="decimal" placeholder="0,00" autocomplete="off"></label>
+        </div>
+        <label style="display:block;margin-top:10px"><span class="label">Za što</span><input id="desc" placeholder="npr. večera, gorivo…" maxlength="60" autocomplete="off"></label>
+        <span class="label" style="margin-top:10px">Dijeli se na <button type="button" class="linklike" id="allFor">svi</button></span>
+        <div id="forWhom"></div>
+        <p class="error small" id="expenseError"></p>
+        <div class="row">
+          <button class="btn" type="button" id="cancelEdit" hidden>Odustani</button>
+          <button class="btn primary" type="submit" id="saveExpense">Dodaj trošak</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="card" id="resultCard">
+      <h2>Tko kome duguje</h2>
+      <div id="transfers"></div>
+      <button class="btn block" id="copyButton" type="button" style="margin-top:10px">Kopiraj za poruku</button>
+    </div>
+
+    <div class="card">
+      <h2>Stanje</h2>
+      <table class="balances"><thead><tr><th></th><th>Platio</th><th>Potrošio</th><th>Saldo</th></tr></thead><tbody id="balances"></tbody></table>
+    </div>
+
+    <div class="card">
+      <h2>Troškovi <span id="totalSpent" class="muted"></span></h2>
+      <div id="expenses"></div>
+    </div>
+    <p class="muted small" style="text-align:center">Sve se sprema samo u ovaj preglednik na ovom uređaju.</p>
+  </main>
+  <script src="settle.js"></script>
+  <script src="troskovi.js"></script>
+</body>
+</html>

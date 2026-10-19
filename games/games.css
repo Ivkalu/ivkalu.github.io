@@ -1,0 +1,145 @@
+/* Shared look of the mobile-first game pages (bela, mr-white, troskovi) */
+:root {
+  --navy: #1f2a44;
+  --teal: #00b3b3;
+  --teal-dark: #008b8b;
+  --orange: #ff8126;
+  --bg: #f2f3f5;
+  --card: #ffffff;
+  --text: #1c2233;
+  --muted: #6b7280;
+  --border: #e1e4eb;
+  --danger: #d93025;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.45 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--navy);
+  color: #e1e4eb;
+}
+.topbar h1 { flex: 1; margin: 0; font: 700 20px/1.2 'Roboto', sans-serif; letter-spacing: .04em; }
+.topbar a, .topbar button {
+  color: #e1e4eb;
+  background: none;
+  border: none;
+  font: inherit;
+  font-size: 15px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.topbar a:hover, .topbar button:hover { background: rgba(255,255,255,.1); }
+main { max-width: 640px; margin: 0 auto; padding: 14px 12px 120px; }
+.card {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 10px rgba(31,42,68,.06);
+}
+.card h2 { margin: 0 0 10px; font-size: 15px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+button, input, select { font: inherit; color: inherit; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn.primary { background: var(--teal); border-color: var(--teal); color: #fff; }
+.btn.primary:disabled { opacity: .45; cursor: default; }
+.btn.danger { color: var(--danger); }
+.btn.block { width: 100%; }
+.btn.big { min-height: 56px; font-size: 18px; }
+input[type="text"], input[type="number"], input:not([type]), select {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+}
+input:focus, select:focus { outline: 2px solid var(--teal); outline-offset: -1px; }
+.row { display: flex; gap: 8px; align-items: center; }
+.row > * { flex: 1; }
+.seg { display: flex; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.seg button { flex: 1; min-height: 44px; border: none; background: #fff; cursor: pointer; font-weight: 600; }
+.seg button + button { border-left: 1px solid var(--border); }
+.seg button.on { background: var(--navy); color: #fff; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 12px;
+  margin: 0 6px 6px 0;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+  font-size: 15px;
+}
+.chip.on { background: var(--teal); border-color: var(--teal); color: #fff; }
+.bottombar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  background: linear-gradient(transparent, var(--bg) 30%);
+}
+.bottombar > div { max-width: 640px; margin: 0 auto; display: flex; gap: 8px; }
+.sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: rgba(15, 20, 35, .45);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.sheet-backdrop[hidden] { display: none; }
+.sheet {
+  width: 100%;
+  max-width: 640px;
+  max-height: 92vh;
+  overflow-y: auto;
+  background: var(--bg);
+  border-radius: 18px 18px 0 0;
+  padding: 16px 12px calc(16px + env(safe-area-inset-bottom));
+}
+.sheet h3 { margin: 4px 4px 12px; font-size: 18px; }
+.label { display: block; margin: 0 0 6px; font-size: 13px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+.banner {
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--navy);
+  color: #fff;
+  text-align: center;
+  margin-bottom: 12px;
+}
+.banner strong { display: block; font-size: 22px; }
