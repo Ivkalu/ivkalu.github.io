@@ -33,7 +33,7 @@ It's about **moving cards from left to right.**
 
 ---
 
-It started with CORE-43.
+It started with VDOC-43.
 
 *"The dashboard must show sales data in real time, as specified in the project documentation, section 4.2.1."*
 
@@ -41,12 +41,12 @@ A simple ticket. 1 story point. The requirement was right there in the documenta
 
 So I followed it.
 
-- Section 4.2.1 says *real time*. The data arrives once a night. 📊 ➡️ CORE-44
-- To find out whether it could arrive more often, we needed access to a system nobody on the team has access to. ➡️ CORE-45
-- Access required a request to IT. ➡️ CORE-46
+- Section 4.2.1 says *real time*. The data arrives once a night. 📊 ➡️ VDOC-44
+- To find out whether it could arrive more often, we needed access to a system nobody on the team has access to. ➡️ VDOC-45
+- Access required a request to IT. ➡️ VDOC-46
 - IT needs three weeks to *reply* to an email. Processing the actual request is a separate, much longer journey. We once waited nine months for a test user account. When it finally arrived, the project it was for had been cancelled and the account had already expired. ⏳
-- While we waited, a team I had never heard of opened a ticket to ask why we opened a ticket. ➡️ CORE-47
-- So we stopped waiting and made the dashboard refresh itself every five seconds. ➡️ CORE-48
+- While we waited, a team I had never heard of opened a ticket to ask why we opened a ticket. ➡️ VDOC-47
+- So we stopped waiting and made the dashboard refresh itself every five seconds. ➡️ VDOC-48
 
 Three weeks later I was reading a GitHub issue from 2016 about timezones, in which a man in Finland was also crying.
 
@@ -60,13 +60,13 @@ But the acceptance criteria said *"real time"*. Not *"new data"*.
 
 Oh, and section 4.2.1? It turned out to be wrong. It had been copy-pasted from another project's proposal, for a different system that actually did have live data. Nobody noticed in time. All four people had signed it off. None of them had read it.
 
-By the time anyone found out, CORE-43 was Done, demoed and in the quarterly report. Fixing the documentation now would need a ticket.
+By the time anyone found out, VDOC-43 was Done, demoed and in the quarterly report. Fixing the documentation now would need a ticket.
 
 And access from IT.
 
 ---
 
-Here's what CORE-43 taught me:
+Here's what VDOC-43 taught me:
 
 💡 **Acceptance criteria are a contract, not a suggestion.** If the documentation is wrong, that's a documentation problem. The ticket is green.
 
