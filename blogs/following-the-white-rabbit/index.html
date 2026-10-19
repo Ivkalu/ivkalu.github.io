@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I Followed the White Rabbit Into Our Jira Board. Here&#x27;s What It Taught Me About Leadership. | Luka Ivanković</title>
+    <title>I Closed 47 Tickets Last Sprint. Here&#x27;s What It Taught Me About Leadership. | Luka Ivanković</title>
     <meta name="description" content="I closed 47 tickets last sprint.">
-    <meta property="og:title" content="I Followed the White Rabbit Into Our Jira Board. Here&#x27;s What It Taught Me About Leadership. | Luka Ivanković">
+    <meta property="og:title" content="I Closed 47 Tickets Last Sprint. Here&#x27;s What It Taught Me About Leadership. | Luka Ivanković">
     <meta property="og:description" content="I closed 47 tickets last sprint.">
     <meta property="og:image" content="https://ivkalu.com/blogs/images/white-rabbit-ticket-wheel.jpg">
     <meta name="twitter:card" content="summary_large_image">
@@ -18,7 +18,7 @@
 </head>
 <body>
     <header>
-        <h1 class="post-title">I Followed the White Rabbit Into Our Jira Board. Here&#x27;s What It Taught Me About Leadership.</h1>
+        <h1 class="post-title">I Closed 47 Tickets Last Sprint. Here&#x27;s What It Taught Me About Leadership.</h1>
         <p class="post-date">October 19, 2026</p>
         <div class="contact">
             <a href="../"><i class="fas fa-arrow-left"></i> All posts</a>
@@ -42,27 +42,29 @@
 <p>Software is not about building things.</p>
 <p>It&rsquo;s about <strong>moving cards from left to right.</strong></p>
 <hr />
-<p>It started with PROJ-4412.</p>
-<p><em>&ldquo;Button on settings page should be slightly bluer.&rdquo;</em></p>
-<p>A simple ticket. 1 story point. A beautiful little white rabbit, running past my desk, checking its pocket watch.</p>
+<p>It started with CORE-43.</p>
+<p><em>&ldquo;The dashboard must show sales data in real time, as specified in the project documentation, section 4.2.1.&rdquo;</em></p>
+<p>A simple ticket. 1 story point. The requirement was right there in the documentation. Signed off by four people. What could possibly go wrong?</p>
 <p>So I followed it.</p>
 <ul>
-<li>The button colour came from a design token. 🎨</li>
-<li>The design token came from a theme. The theme needed a refactor. ➡️ PROJ-4413</li>
-<li>The refactor needed a newer version of the UI library. ➡️ PROJ-4414</li>
-<li>The new UI library broke the build. ➡️ PROJ-4415</li>
-<li>Fixing the build required a newer Node version. ➡️ PROJ-4416</li>
-<li>The newer Node version broke the deployment pipeline. ➡️ PROJ-4417</li>
-<li>The pipeline belonged to another team, who opened a ticket to ask why I opened a ticket. ➡️ PROJ-4418</li>
+<li>Section 4.2.1 says <em>real time</em>. The data arrives once a night. 📊 ➡️ CORE-44</li>
+<li>To find out whether it could arrive more often, we needed access to a system nobody on the team has access to. ➡️ CORE-45</li>
+<li>Access required a request to IT. ➡️ CORE-46</li>
+<li>IT needs three weeks to <em>reply</em> to an email. Processing the actual request is a separate, much longer journey. We once waited nine months for a test user account. When it finally arrived, the project it was for had been cancelled and the account had already expired. ⏳</li>
+<li>While we waited, a team I had never heard of opened a ticket to ask why we opened a ticket. ➡️ CORE-47</li>
+<li>So we stopped waiting and made the dashboard refresh itself every five seconds. ➡️ CORE-48</li>
 </ul>
-<p>Three days later I was reading a GitHub issue from 2016 in which a man in Finland was also crying.</p>
-<p>The button is now bluer. ✅</p>
-<p>It is also invisible in dark mode.</p>
-<p>But the acceptance criteria said <em>&ldquo;slightly bluer&rdquo;</em>. Not <em>&ldquo;visible&rdquo;</em>.</p>
+<p>Three weeks later I was reading a GitHub issue from 2016 about timezones, in which a man in Finland was also crying.</p>
+<p>The dashboard now updates in real time. ✅</p>
+<p>Every five seconds it proudly shows the exact same numbers from last night. Including the sales of a store that closed in March.</p>
+<p>But the acceptance criteria said <em>&ldquo;real time&rdquo;</em>. Not <em>&ldquo;new data&rdquo;</em>.</p>
 <p><strong>Acceptance criteria met.</strong> 🚀</p>
+<p>Oh, and section 4.2.1? It turned out to be wrong. It had been copy-pasted from another project&rsquo;s proposal, for a different system that actually did have live data. Nobody noticed in time. All four people had signed it off. None of them had read it.</p>
+<p>By the time anyone found out, CORE-43 was Done, demoed and in the quarterly report. Fixing the documentation now would need a ticket.</p>
+<p>And access from IT.</p>
 <hr />
-<p>Here&rsquo;s what that rabbit taught me:</p>
-<p>💡 <strong>Acceptance criteria are a contract, not a suggestion.</strong> If the user wanted the button to work, they should have written it in the ticket.</p>
+<p>Here&rsquo;s what CORE-43 taught me:</p>
+<p>💡 <strong>Acceptance criteria are a contract, not a suggestion.</strong> If the documentation is wrong, that&rsquo;s a documentation problem. The ticket is green.</p>
 <p>💡 <strong>Never close a ticket without opening two.</strong> A healthy backlog is a growing backlog. A growing backlog is job security.</p>
 <p>💡 <strong>Velocity is the product.</strong> The customer doesn&rsquo;t buy software. The customer buys our burndown chart. They just don&rsquo;t know it yet.</p>
 <p>💡 <strong>A bug fixed is a story point lost.</strong> A bug <em>re-opened</em> is a story point earned twice.</p>
@@ -82,8 +84,8 @@
 <p>We are performing the <em>ritual</em> of building software.</p>
 <p>We have stand-ups where nobody stands and nothing goes up. We have retrospectives where we agree to do better, then create a ticket called &ldquo;Do better&rdquo;, estimate it at 3 points and move it to the next sprint. Forever. We have a Definition of Done that is longer than the product&rsquo;s actual documentation, and a product nobody has opened since the demo.</p>
 <p>Nobody is lying, exactly. Every number on every dashboard is true. The tickets really were closed. The criteria really were met. It&rsquo;s just that all of those true things, added together, describe a company that doesn&rsquo;t exist.</p>
-<p>The rabbit isn&rsquo;t late because there&rsquo;s too much work.</p>
-<p>The rabbit is late because <strong>being late is the work.</strong></p>
+<p>We&rsquo;re not late because there&rsquo;s too much work.</p>
+<p>We&rsquo;re late because <strong>being late is the work.</strong></p>
 <hr />
 <p>Last time I wrote that I can&rsquo;t wait for the war against the machines, because it would finally give humanity a common goal.</p>
 <p>I&rsquo;ve changed my mind.</p>
@@ -92,12 +94,12 @@
 <p>Which means humans are now obsolete in the one skill we truly mastered: <strong>looking busy.</strong></p>
 <hr />
 <p>So here&rsquo;s my advice to every young engineer:</p>
-<p>Follow the white rabbit. 🐇</p>
+<p>Pick up the ticket. 🎫</p>
 <p>Move the card. 🔄</p>
 <p>Never ask what the ticket is for. 🙅</p>
 <p>Agree? 👇</p>
 <p>♻️ Repost if your sprint was 100% done and 0% useful.</p>
-<p><em>#leadership #agile #jira #growthmindset #storypoints #velocity #whiterabbit #humbled</em></p>
+<p><em>#leadership #agile #jira #growthmindset #storypoints #velocity #humbled</em></p>
         </article>
     </section>
 </body>

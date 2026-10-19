@@ -1,5 +1,5 @@
 ---
-title: I Followed the White Rabbit Into Our Jira Board. Here's What It Taught Me About Leadership.
+title: I Closed 47 Tickets Last Sprint. Here's What It Taught Me About Leadership.
 date: 2026-10-19
 draft: false
 image: blogs/images/white-rabbit-ticket-wheel.jpg
@@ -33,37 +33,42 @@ It's about **moving cards from left to right.**
 
 ---
 
-It started with PROJ-4412.
+It started with CORE-43.
 
-*"Button on settings page should be slightly bluer."*
+*"The dashboard must show sales data in real time, as specified in the project documentation, section 4.2.1."*
 
-A simple ticket. 1 story point. A beautiful little white rabbit, running past my desk, checking its pocket watch.
+A simple ticket. 1 story point. The requirement was right there in the documentation. Signed off by four people. What could possibly go wrong?
 
 So I followed it.
 
-- The button colour came from a design token. 🎨
-- The design token came from a theme. The theme needed a refactor. ➡️ PROJ-4413
-- The refactor needed a newer version of the UI library. ➡️ PROJ-4414
-- The new UI library broke the build. ➡️ PROJ-4415
-- Fixing the build required a newer Node version. ➡️ PROJ-4416
-- The newer Node version broke the deployment pipeline. ➡️ PROJ-4417
-- The pipeline belonged to another team, who opened a ticket to ask why I opened a ticket. ➡️ PROJ-4418
+- Section 4.2.1 says *real time*. The data arrives once a night. 📊 ➡️ CORE-44
+- To find out whether it could arrive more often, we needed access to a system nobody on the team has access to. ➡️ CORE-45
+- Access required a request to IT. ➡️ CORE-46
+- IT needs three weeks to *reply* to an email. Processing the actual request is a separate, much longer journey. We once waited nine months for a test user account. When it finally arrived, the project it was for had been cancelled and the account had already expired. ⏳
+- While we waited, a team I had never heard of opened a ticket to ask why we opened a ticket. ➡️ CORE-47
+- So we stopped waiting and made the dashboard refresh itself every five seconds. ➡️ CORE-48
 
-Three days later I was reading a GitHub issue from 2016 in which a man in Finland was also crying.
+Three weeks later I was reading a GitHub issue from 2016 about timezones, in which a man in Finland was also crying.
 
-The button is now bluer. ✅
+The dashboard now updates in real time. ✅
 
-It is also invisible in dark mode.
+Every five seconds it proudly shows the exact same numbers from last night. Including the sales of a store that closed in March.
 
-But the acceptance criteria said *"slightly bluer"*. Not *"visible"*.
+But the acceptance criteria said *"real time"*. Not *"new data"*.
 
 **Acceptance criteria met.** 🚀
 
+Oh, and section 4.2.1? It turned out to be wrong. It had been copy-pasted from another project's proposal, for a different system that actually did have live data. Nobody noticed in time. All four people had signed it off. None of them had read it.
+
+By the time anyone found out, CORE-43 was Done, demoed and in the quarterly report. Fixing the documentation now would need a ticket.
+
+And access from IT.
+
 ---
 
-Here's what that rabbit taught me:
+Here's what CORE-43 taught me:
 
-💡 **Acceptance criteria are a contract, not a suggestion.** If the user wanted the button to work, they should have written it in the ticket.
+💡 **Acceptance criteria are a contract, not a suggestion.** If the documentation is wrong, that's a documentation problem. The ticket is green.
 
 💡 **Never close a ticket without opening two.** A healthy backlog is a growing backlog. A growing backlog is job security.
 
@@ -103,9 +108,9 @@ We have stand-ups where nobody stands and nothing goes up. We have retrospective
 
 Nobody is lying, exactly. Every number on every dashboard is true. The tickets really were closed. The criteria really were met. It's just that all of those true things, added together, describe a company that doesn't exist.
 
-The rabbit isn't late because there's too much work.
+We're not late because there's too much work.
 
-The rabbit is late because **being late is the work.**
+We're late because **being late is the work.**
 
 ---
 
@@ -123,7 +128,7 @@ Which means humans are now obsolete in the one skill we truly mastered: **lookin
 
 So here's my advice to every young engineer:
 
-Follow the white rabbit. 🐇
+Pick up the ticket. 🎫
 
 Move the card. 🔄
 
@@ -133,4 +138,4 @@ Agree? 👇
 
 ♻️ Repost if your sprint was 100% done and 0% useful.
 
-*#leadership #agile #jira #growthmindset #storypoints #velocity #whiterabbit #humbled*
+*#leadership #agile #jira #growthmindset #storypoints #velocity #humbled*
