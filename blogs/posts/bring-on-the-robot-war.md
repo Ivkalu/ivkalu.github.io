@@ -2,6 +2,8 @@
 title: Bring On the Robot War
 date: 2026-10-17
 draft: false
+image: blogs/images/robot-war-crowd.jpg
+image_alt: A crowd of rival fans, a priest, a punk, a farmer, a grandmother, a vegan and a butcher standing together, facing giant red-eyed robots on a burning horizon
 ---
 I'll just say it: I can't wait for the war between humans and machines.
 
